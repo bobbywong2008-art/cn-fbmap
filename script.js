@@ -104,7 +104,11 @@ const citiesData = [
     id: "shanghai", name: "上海",
     center: [31.2304, 121.4737], color: "#ef4444", region: "华东",
     teams: [
-      { name: "上海烽火狼", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "上海烽火狼", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2025-26", age: "U15", title: "Y-League 冠军", note: "" }
+        ]
+      },
       { name: "上海鹰", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
         honors: [
           { season: "2021秋季", age: "U9", title: "Y-League 冠军", note: "上海朱雀" },
@@ -112,7 +116,9 @@ const citiesData = [
           { season: "2023秋季", age: "U13", title: "Y-League 冠军", note: "上海朱雀" },
           { season: "2024春季", age: "U9", title: "Y-League 冠军", note: "上海朱雀" },
           { season: "2024-25", age: "U11", title: "Y-League 冠军", note: "" },
-          { season: "2024-25", age: "U14", title: "Y-League 冠军", note: "" }
+          { season: "2024-25", age: "U14", title: "Y-League 冠军", note: "" },
+          { season: "2025-26", age: "U9", title: "Y-League 冠军", note: "" },
+          { season: "2025-26", age: "U13", title: "Y-League 冠军", note: "" }
         ]
       },
       { name: "上海蓝魔", age: "U11 / U13", founded: "待确认", coach: "待确认" },
@@ -203,7 +209,8 @@ const citiesData = [
       },
       { name: "武汉change眼镜蛇", age: "U11", founded: "待确认", coach: "待确认",
         honors: [
-          { season: "2024-25", age: "U9", title: "Y-League 冠军", note: "" }
+          { season: "2024-25", age: "U9", title: "Y-League 冠军", note: "" },
+          { season: "2025-26", age: "U11", title: "Y-League 冠军", note: "" }
         ]
       },
       { name: "武汉赤焰", age: "待确认", founded: "待确认", coach: "待确认" },
