@@ -63,7 +63,11 @@ const citiesData = [
     id: "guangzhou", name: "广州",
     center: [23.1291, 113.2644], color: "#3b82f6", region: "华南",
     teams: [
-      { name: "广州骑士", age: "U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "广州骑士", age: "U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2023秋季", age: "U15", title: "Y-League 冠军", note: "" }
+        ]
+      },
       { name: "广州白鳍豚", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL" },
       { name: "广州八爪鱼", age: "U10", founded: "待确认", coach: "待确认" }
     ]
@@ -81,7 +85,11 @@ const citiesData = [
     id: "foshan", name: "佛山",
     center: [23.0215, 113.1214], color: "#8b5cf6", region: "华南",
     teams: [
-      { name: "佛山小兕虎", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "康师傅，肥鸡", league: "CYFL" }
+      { name: "佛山小兕虎", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "康师傅，肥鸡", league: "CYFL",
+        honors: [
+          { season: "2024-25", age: "U13", title: "Y-League 冠军", note: "" }
+        ]
+      }
     ]
   },
   {
@@ -98,25 +106,38 @@ const citiesData = [
     teams: [
       { name: "上海烽火狼", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL",
         honors: [
-          { season: "2025-26", age: "U15", note: "" }
+          { season: "2025-26", age: "U15", title: "CYFL 冠军", note: "" }
         ]
       },
       { name: "上海鹰", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
         honors: [
-          { season: "2021秋季", age: "U9", note: "上海朱雀" },
-          { season: "2023秋季", age: "U9", note: "上海朱雀" },
-          { season: "2023秋季", age: "U13", note: "上海朱雀" },
-          { season: "2024春季", age: "U9", note: "上海朱雀" },
-          { season: "2024-25", age: "U11", note: "" },
-          { season: "2024-25", age: "U14", note: "" },
-          { season: "2025-26", age: "U9", note: "" },
-          { season: "2025-26", age: "U13", note: "" }
+          { season: "2021秋季", age: "U9", title: "Y-League 冠军", note: "上海朱雀" },
+          { season: "2023秋季", age: "U9", title: "Y-League 冠军", note: "上海朱雀" },
+          { season: "2023秋季", age: "U13", title: "Y-League 冠军", note: "上海朱雀" },
+          { season: "2024春季", age: "U9", title: "Y-League 冠军", note: "上海朱雀" },
+          { season: "2024-25", age: "U11", title: "Y-League 冠军", note: "" },
+          { season: "2024-25", age: "U14", title: "Y-League 冠军", note: "" },
+          { season: "2025-26", age: "U9", title: "CYFL 冠军", note: "" },
+          { season: "2025-26", age: "U13", title: "CYFL 冠军", note: "" }
         ]
       },
       { name: "上海蓝魔", age: "U11 / U13", founded: "待确认", coach: "待确认" },
       { name: "上海Chang飓风", age: "U11", founded: "待确认", coach: "待确认" },
-      { name: "上海鳄鱼", age: "U9 / U11 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
-      { name: "上海银河", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "上海鳄鱼", age: "U9 / U11 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2023春季", age: "U11", title: "Y-League 冠军", note: "" },
+          { season: "2023秋季", age: "U11", title: "Y-League 冠军", note: "" },
+          { season: "2024春季", age: "U11", title: "Y-League 冠军", note: "" }
+        ]
+      },
+      { name: "上海银河", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2021秋季", age: "U11", title: "Y-League 冠军", note: "" },
+          { season: "2021秋季", age: "U13", title: "Y-League 冠军", note: "" },
+          { season: "2023春季", age: "U13", title: "Y-League 冠军", note: "" },
+          { season: "2024春季", age: "U13", title: "Y-League 冠军", note: "" }
+        ]
+      },
       { name: "上海坚毅坦克", age: "U9 / U11", founded: "待确认", coach: "待确认", league: "CYFL" },
       { name: "上海AFA鲨鱼", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
       { name: "上海飓风角斗士", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" },
@@ -183,12 +204,13 @@ const citiesData = [
     teams: [
       { name: "武汉change巴萨卡", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认",
         honors: [
-          { season: "2023春季", age: "U9", note: "武汉战隼" }
+          { season: "2023春季", age: "U9", title: "Y-League 冠军", note: "武汉战隼" }
         ]
       },
       { name: "武汉change眼镜蛇", age: "U11", founded: "待确认", coach: "待确认",
         honors: [
-          { season: "2025-26", age: "U11", note: "" }
+          { season: "2024-25", age: "U9", title: "Y-League 冠军", note: "" },
+          { season: "2025-26", age: "U11", title: "CYFL 冠军", note: "" }
         ]
       },
       { name: "武汉赤焰", age: "待确认", founded: "待确认", coach: "待确认" },
@@ -386,13 +408,17 @@ function renderCity(city, visible) {
             <p><strong>教练：</strong>${team.coach}</p>
             ${team.honors && team.honors.length > 0 ? `
               <div class="popup-honors">
-                <div class="honors-title">🏆 荣誉</div>
-                <div class="honors-list">
+                <div class="honors-header" onclick="window.toggleHonors(this)">
+                  <span class="honors-title">🏆 荣誉 (${team.honors.length})</span>
+                  <span class="honors-arrow">▼</span>
+                </div>
+                <div class="honors-list collapsed">
                   ${team.honors.map(h => `
                     <div class="honor-item">
                       <span class="honor-season">${h.season}</span>
                       <span class="honor-age">${h.age}</span>
-                      ${h.note ? `<span class="honor-note">（${h.note}）</span>` : ''}
+                      <span class="honor-title">${h.title || '冠军'}</span>
+                      ${h.note ? `<span class="honor-note">(${h.note})</span>` : ''}
                     </div>
                   `).join('')}
                 </div>
@@ -524,6 +550,14 @@ function resetToNational() {
   map.flyTo([35.8, 104.1], 4, { duration: 1 });
   applyFilters();
 }
+
+// Toggle honors dropdown
+window.toggleHonors = function(header) {
+  const list = header.nextElementSibling;
+  const arrow = header.querySelector('.honors-arrow');
+  list.classList.toggle('collapsed');
+  arrow.textContent = list.classList.contains('collapsed') ? '▼' : '▲';
+};
 
 // Share function
 function shareTeam(teamName, cityName) {

@@ -443,23 +443,50 @@ html, body {
    ======================== */
 .popup-honors {
   margin-top: 14px;
-  padding: 12px 14px;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
   border: 1px solid rgba(212, 175, 55, 0.25);
   border-radius: 10px;
+  overflow: hidden;
+}
+.popup-honors .honors-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+.popup-honors .honors-header:hover {
+  background: rgba(212, 175, 55, 0.1);
 }
 .popup-honors .honors-title {
   font-size: 12px;
   font-weight: 700;
   color: var(--gold-light);
   letter-spacing: 1px;
-  margin-bottom: 10px;
   text-transform: uppercase;
+}
+.popup-honors .honors-arrow {
+  font-size: 11px;
+  color: var(--gold-light);
+  transition: transform 0.2s;
 }
 .popup-honors .honors-list {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding: 0 14px 12px;
+  max-height: 200px;
+  overflow-y: auto;
+  transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
+  opacity: 1;
+}
+.popup-honors .honors-list.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 14px;
+  overflow: hidden;
 }
 .popup-honors .honor-item {
   display: flex;
@@ -467,6 +494,11 @@ html, body {
   gap: 8px;
   flex-wrap: wrap;
   font-size: 12px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.popup-honors .honor-item:last-child {
+  border-bottom: none;
 }
 .popup-honors .honor-season {
   display: inline-block;
@@ -486,6 +518,16 @@ html, body {
   font-weight: 600;
   font-size: 11px;
   border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.popup-honors .honor-title {
+  display: inline-block;
+  background: rgba(46, 213, 115, 0.1);
+  color: var(--success);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 11px;
+  border: 1px solid rgba(46, 213, 115, 0.2);
 }
 .popup-honors .honor-note {
   color: var(--text-secondary);
