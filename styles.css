@@ -439,6 +439,61 @@ html, body {
 }
 
 /* ========================
+   HONORS (popup)
+   ======================== */
+.popup-honors {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 10px;
+}
+.popup-honors .honors-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.popup-honors .honors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.popup-honors .honor-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.popup-honors .honor-season {
+  display: inline-block;
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--gold-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+}
+.popup-honors .honor-age {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.popup-honors .honor-note {
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-style: italic;
+}
+
+/* ========================
    LEGEND
    ======================== */
 #legend {

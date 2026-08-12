@@ -96,8 +96,23 @@ const citiesData = [
     id: "shanghai", name: "上海",
     center: [31.2304, 121.4737], color: "#ef4444", region: "华东",
     teams: [
-      { name: "上海烽火狼", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" },
-      { name: "上海鹰", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "上海烽火狼", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2025-26", age: "U15", note: "" }
+        ]
+      },
+      { name: "上海鹰", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2021秋季", age: "U9", note: "上海朱雀" },
+          { season: "2023秋季", age: "U9", note: "上海朱雀" },
+          { season: "2023秋季", age: "U13", note: "上海朱雀" },
+          { season: "2024春季", age: "U9", note: "上海朱雀" },
+          { season: "2024-25", age: "U11", note: "" },
+          { season: "2024-25", age: "U14", note: "" },
+          { season: "2025-26", age: "U9", note: "" },
+          { season: "2025-26", age: "U13", note: "" }
+        ]
+      },
       { name: "上海蓝魔", age: "U11 / U13", founded: "待确认", coach: "待确认" },
       { name: "上海Chang飓风", age: "U11", founded: "待确认", coach: "待确认" },
       { name: "上海鳄鱼", age: "U9 / U11 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
@@ -166,8 +181,16 @@ const citiesData = [
     id: "wuhan", name: "武汉",
     center: [30.5928, 114.3055], color: "#10b981", region: "华中",
     teams: [
-      { name: "武汉change巴萨卡", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认" },
-      { name: "武汉change眼镜蛇", age: "U11", founded: "待确认", coach: "待确认" },
+      { name: "武汉change巴萨卡", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认",
+        honors: [
+          { season: "2023春季", age: "U9", note: "武汉战隼" }
+        ]
+      },
+      { name: "武汉change眼镜蛇", age: "U11", founded: "待确认", coach: "待确认",
+        honors: [
+          { season: "2025-26", age: "U11", note: "" }
+        ]
+      },
       { name: "武汉赤焰", age: "待确认", founded: "待确认", coach: "待确认" },
       { name: "武汉猎豹", age: "U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" }
     ]
@@ -361,6 +384,20 @@ function renderCity(city, visible) {
             <p><strong>项目：</strong>美式足球（装备）</p>
             <p><strong>成立：</strong>${team.founded}</p>
             <p><strong>教练：</strong>${team.coach}</p>
+            ${team.honors && team.honors.length > 0 ? `
+              <div class="popup-honors">
+                <div class="honors-title">🏆 荣誉</div>
+                <div class="honors-list">
+                  ${team.honors.map(h => `
+                    <div class="honor-item">
+                      <span class="honor-season">${h.season}</span>
+                      <span class="honor-age">${h.age}</span>
+                      ${h.note ? `<span class="honor-note">（${h.note}）</span>` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
           </div>
           <div class="popup-actions">
             <button class="popup-btn" onclick="zoomToCity('${city.id}'); map.closePopup();">
