@@ -490,11 +490,10 @@ html, body {
 }
 .popup-honors .honor-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  flex-wrap: wrap;
   font-size: 12px;
-  padding: 5px 0;
+  padding: 6px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 .popup-honors .honor-item:last-child {
@@ -508,8 +507,28 @@ html, body {
   border-radius: 4px;
   font-weight: 700;
   font-size: 11px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
-.popup-honors .honor-age {
+.popup-honors .honor-detail {
+  color: var(--text-primary);
+  font-size: 12px;
+  line-height: 1.6;
+  flex: 1;
+}
+.popup-honors .honor-detail .age-with-note {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.popup-honors .honor-detail .note-inline {
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-style: italic;
+}
+.popup-honors .honor-age,
+.popup-honors .honor-title,
+.popup-honors .honor-note {
   display: inline-block;
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-primary);
@@ -518,21 +537,6 @@ html, body {
   font-weight: 600;
   font-size: 11px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-}
-.popup-honors .honor-title {
-  display: inline-block;
-  background: rgba(46, 213, 115, 0.1);
-  color: var(--success);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 11px;
-  border: 1px solid rgba(46, 213, 115, 0.2);
-}
-.popup-honors .honor-note {
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-style: italic;
 }
 
 /* ========================

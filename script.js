@@ -138,7 +138,12 @@ const citiesData = [
           { season: "2024春季", age: "U13", title: "Y-League 冠军", note: "" }
         ]
       },
-      { name: "上海坚毅坦克", age: "U9 / U11", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "上海坚毅坦克", age: "U9 / U11", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2022秋季", age: "U9", title: "Y-League 冠军", note: "" },
+          { season: "2022秋季", age: "U11", title: "Y-League 冠军", note: "" }
+        ]
+      },
       { name: "上海AFA鲨鱼", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
       { name: "上海飓风角斗士", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" },
       { name: "上海幽灵虎", age: "U9", founded: "待确认", coach: "待确认" }
@@ -406,24 +411,29 @@ function renderCity(city, visible) {
             <p><strong>项目：</strong>美式足球（装备）</p>
             <p><strong>成立：</strong>${team.founded}</p>
             <p><strong>教练：</strong>${team.coach}</p>
-            ${team.honors && team.honors.length > 0 ? `
-              <div class="popup-honors">
-                <div class="honors-header" onclick="window.toggleHonors(this)">
-                  <span class="honors-title">🏆 荣誉 (${team.honors.length})</span>
-                  <span class="honors-arrow">▼</span>
+            ${team.honors && team.honors.length > 0 ? (() => {
+              const grouped = team.honors.reduce((acc, h) => {
+                if (!acc[h.season]) acc[h.season] = [];
+                acc[h.season].push(h);
+                return acc;
+              }, {});
+              return `
+                <div class="popup-honors">
+                  <div class="honors-header" onclick="window.toggleHonors(this)">
+                    <span class="honors-title">🏆 荣誉 (${team.honors.length})</span>
+                    <span class="honors-arrow">▼</span>
+                  </div>
+                  <div class="honors-list collapsed">
+                    ${Object.entries(grouped).map(([season, honors]) => `
+                      <div class="honor-item">
+                        <span class="honor-season">${season}</span>
+                        <span class="honor-detail">${honors.map(h => `${h.age}${h.note ? ` (${h.note})` : ''}`).join('、')}</span>
+                      </div>
+                    `).join('')}
+                  </div>
                 </div>
-                <div class="honors-list collapsed">
-                  ${team.honors.map(h => `
-                    <div class="honor-item">
-                      <span class="honor-season">${h.season}</span>
-                      <span class="honor-age">${h.age}</span>
-                      <span class="honor-title">${h.title || '冠军'}</span>
-                      ${h.note ? `<span class="honor-note">(${h.note})</span>` : ''}
-                    </div>
-                  `).join('')}
-                </div>
-              </div>
-            ` : ''}
+              `;
+            })() : ''}
           </div>
           <div class="popup-actions">
             <button class="popup-btn" onclick="zoomToCity('${city.id}'); map.closePopup();">
