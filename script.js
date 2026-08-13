@@ -424,12 +424,21 @@ function renderCity(city, visible) {
                     <span class="honors-arrow">▼</span>
                   </div>
                   <div class="honors-list collapsed">
-                    ${Object.entries(grouped).map(([season, honors]) => `
-                      <div class="honor-item">
-                        <span class="honor-season">${season}</span>
-                        <span class="honor-detail">${honors.map(h => `${h.age}${h.note ? ` (${h.note})` : ''}`).join('、')}</span>
-                      </div>
-                    `).join('')}
+                    ${Object.entries(grouped).map(([season, honors]) => {
+                      const byTitle = honors.reduce((acc, h) => {
+                        const t = h.title || '冠军';
+                        if (!acc[t]) acc[t] = [];
+                        acc[t].push(h);
+                        return acc;
+                      }, {});
+                      return Object.entries(byTitle).map(([title, list]) => `
+                        <div class="honor-item">
+                          <span class="honor-season">${season}</span>
+                          <span class="honor-title-chip">${title}</span>
+                          <span class="honor-detail">${list.map(h => h.age + (h.note ? `（${h.note}）` : '')).join('、')}</span>
+                        </div>
+                      `).join('');
+                    }).join('')}
                   </div>
                 </div>
               `;
