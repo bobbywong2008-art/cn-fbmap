@@ -487,16 +487,22 @@ function renderCity(city, visible) {
               <p><span class="cp-label">教练</span>${team.coach}</p>
             </div>
             ${team.honors && team.honors.length > 0 ? (() => {
-              const grouped = team.honors.reduce((acc, h) => {
-                if (!acc[h.season]) acc[h.season] = [];
-                acc[h.season].push(h);
-                return acc;
-              }, {});
               const medalCls = (t) => {
                 if (t.indexOf('亚军') > -1) return 's';
                 if (t.indexOf('季军') > -1) return 'b';
                 return 'g';
               };
+              const yearOf = (s) => {
+                const m = String(s).match(/(\d{4})/);
+                return m ? parseInt(m[1], 10) : 0;
+              };
+              // 排序：先按年份，同年内跨年赛季（含-）排在纯年份后面
+              const sortKey = (s) => {
+                const y = yearOf(s);
+                const dash = String(s).indexOf('-') > -1 ? 1 : 0;
+                return y * 10 + dash;
+              };
+              const sortedHonors = team.honors.slice().sort((a, b) => sortKey(a.season) - sortKey(b.season));
               return `
                 <div class="cp-honors">
                   <div class="cp-honors-head" onclick="window.toggleHonors(this)">
@@ -504,19 +510,14 @@ function renderCity(city, visible) {
                     <span class="cp-arrow">▼</span>
                   </div>
                   <div class="cp-honors-list collapsed">
-                    ${Object.entries(grouped).map(([season, honors]) => {
-                      const byTitle = honors.reduce((acc, h) => {
-                        const t = h.title || '冠军';
-                        if (!acc[t]) acc[t] = [];
-                        acc[t].push(h);
-                        return acc;
-                      }, {});
-                      return Object.entries(byTitle).map(([title, list]) => `
+                    ${sortedHonors.map(h => {
+                      const t = h.title || '冠军';
+                      return `
                         <div class="cp-honor-item">
-                          <span class="cp-medal ${medalCls(title)}"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.2 1.3-6.6L2.5 9l6.6-.8L12 2z" fill="currentColor"/></svg></span>
-                          <span class="cp-honor-txt"><b>${season}</b> ${title}<small>${list.map(h => h.age + (h.note ? `（${h.note}）` : '')).join('、')}</small></span>
+                          <span class="cp-medal ${medalCls(t)}"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.2 1.3-6.6L2.5 9l6.6-.8L12 2z" fill="currentColor"/></svg></span>
+                          <span class="cp-honor-txt"><b>${h.season}</b> ${t}<small>${h.age}${h.note ? `（${h.note}）` : ''}</small></span>
                         </div>
-                      `).join('');
+                      `;
                     }).join('')}
                   </div>
                 </div>
