@@ -65,7 +65,14 @@ const citiesData = [
     teams: [
       { name: "广州骑士", age: "U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
         honors: [
-          { season: "2023秋季", age: "U15", title: "Y-League 冠军", note: "" }
+          { season: "2023秋季", age: "U15", title: "Y-League 冠军", note: "" },
+          { season: "2022", age: "U16", title: "广东省橄榄球锦标赛 冠军", note: "极速达阵橄榄球俱乐部队" },
+          { season: "2023", age: "U10", title: "广东省橄榄球锦标赛 季军", note: "广州极速达阵骑士队" },
+          { season: "2023", age: "U12", title: "广东省橄榄球锦标赛 亚军", note: "广州极速达阵独角兽队" },
+          { season: "2023", age: "U18", title: "广东省橄榄球锦标赛 冠军", note: "广州极速达阵骑士队" },
+          { season: "2024", age: "U9", title: "广东省橄榄球锦标赛 季军", note: "极速达阵队" },
+          { season: "2024", age: "U11", title: "广东省橄榄球锦标赛 冠军", note: "" },
+          { season: "2024", age: "U13", title: "广东省橄榄球锦标赛 亚军", note: "极速达阵队" }
         ]
       },
       { name: "广州白鳍豚", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL" },
@@ -76,8 +83,21 @@ const citiesData = [
     id: "shenzhen", name: "深圳",
     center: [22.5431, 114.0579], color: "#10b981", region: "华南",
     teams: [
-      { name: "深圳鲲鹏", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL" },
-      { name: "深圳热浪", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "深圳鲲鹏", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2023", age: "U10", title: "广东省橄榄球锦标赛 亚军", note: "深圳天行达阵袭击者队" },
+          { season: "2023", age: "U12", title: "广东省橄榄球锦标赛 冠军", note: "深圳天行达阵大勇士队" },
+          { season: "2023", age: "U14", title: "广东省橄榄球锦标赛 亚军", note: "深圳天行达阵勇士队" },
+          { season: "2024", age: "U9", title: "广东省橄榄球锦标赛 亚军", note: "" },
+          { season: "2024", age: "U13", title: "广东省橄榄球锦标赛 季军", note: "" }
+        ]
+      },
+      { name: "深圳热浪", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2023", age: "U10", title: "广东省橄榄球锦标赛 冠军", note: "深圳天行达阵热浪队" },
+          { season: "2024", age: "U11", title: "广东省橄榄球锦标赛 亚军", note: "" }
+        ]
+      },
       { name: "深圳火箭熊", age: "U10", founded: "待确认", coach: "待确认" }
     ]
   },
@@ -87,7 +107,15 @@ const citiesData = [
     teams: [
       { name: "佛山小兕虎", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "康师傅，肥鸡", league: "CYFL",
         honors: [
-          { season: "2024-25", age: "U13", title: "Y-League 冠军", note: "" }
+          { season: "2024-25", age: "U13", title: "Y-League 冠军", note: "" },
+          { season: "2022", age: "U10", title: "广东省橄榄球锦标赛 冠军", note: "佛山南海天行达阵俱乐部" },
+          { season: "2022", age: "U12", title: "广东省橄榄球锦标赛 冠军", note: "佛山南海天行达阵俱乐部" },
+          { season: "2023", age: "U12", title: "广东省橄榄球锦标赛 季军", note: "南海天行达阵小兕虎联队" },
+          { season: "2023", age: "U14", title: "广东省橄榄球锦标赛 冠军", note: "南海天行达阵小兕虎队" },
+          { season: "2023", age: "U18", title: "广东省橄榄球锦标赛 亚军", note: "南海天行达阵小兕虎队" },
+          { season: "2024", age: "U9", title: "广东省橄榄球锦标赛 冠军", note: "" },
+          { season: "2024", age: "U11", title: "广东省橄榄球锦标赛 季军", note: "" },
+          { season: "2024", age: "U13", title: "广东省橄榄球锦标赛 冠军", note: "" }
         ]
       }
     ]
