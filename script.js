@@ -123,11 +123,13 @@ const citiesData = [
       },
       { name: "上海蓝魔", age: "U11 / U13", founded: "待确认", coach: "待确认" },
       { name: "上海Chang飓风", age: "U11", founded: "待确认", coach: "待确认" },
-      { name: "上海鳄鱼", age: "U9 / U11 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+      { name: "上海鳄鱼", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
         honors: [
           { season: "2023春季", age: "U11", title: "Y-League 冠军", note: "" },
           { season: "2023秋季", age: "U11", title: "Y-League 冠军", note: "" },
-          { season: "2024春季", age: "U11", title: "Y-League 冠军", note: "" }
+          { season: "2024春季", age: "U11", title: "Y-League 冠军", note: "" },
+          { season: "2026春季", age: "U9", title: "DYFL 冠军", note: "" },
+          { season: "2026春季", age: "U13", title: "DYFL 季军", note: "" }
         ]
       },
       { name: "上海银河", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
@@ -135,7 +137,10 @@ const citiesData = [
           { season: "2021秋季", age: "U11", title: "Y-League 冠军", note: "" },
           { season: "2021秋季", age: "U13", title: "Y-League 冠军", note: "" },
           { season: "2023春季", age: "U13", title: "Y-League 冠军", note: "" },
-          { season: "2024春季", age: "U13", title: "Y-League 冠军", note: "" }
+          { season: "2024春季", age: "U13", title: "Y-League 冠军", note: "" },
+          { season: "2026春季", age: "U9", title: "DYFL 季军", note: "" },
+          { season: "2026春季", age: "U11", title: "DYFL 冠军", note: "" },
+          { season: "2026春季", age: "U13", title: "DYFL 冠军", note: "" }
         ]
       },
       { name: "上海坚毅坦克", age: "U9 / U11", founded: "待确认", coach: "待确认", league: "CYFL",
@@ -144,8 +149,18 @@ const citiesData = [
           { season: "2022秋季", age: "U11", title: "Y-League 冠军", note: "" }
         ]
       },
-      { name: "上海AFA鲨鱼", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
-      { name: "上海飓风角斗士", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "上海AFA鲨鱼", age: "U9 / U11 / U12 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2026春季", age: "U11", title: "DYFL 季军", note: "" },
+          { season: "2026春季", age: "U12", title: "DYFL 冠军", note: "" },
+          { season: "2026春季", age: "U13", title: "DYFL 亚军", note: "" }
+        ]
+      },
+      { name: "上海飓风角斗士", age: "U9 / U11 / U12 / U13", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2026春季", age: "U12", title: "DYFL 季军", note: "" }
+        ]
+      },
       { name: "上海幽灵虎", age: "U9", founded: "待确认", coach: "待确认" }
     ]
   },
@@ -154,7 +169,11 @@ const citiesData = [
     id: "nanjing", name: "南京",
     center: [32.0603, 118.7969], color: "#06b6d4", region: "华东",
     teams: [
-      { name: "南京征服者", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "南京征服者", age: "U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2026春季", age: "U11", title: "DYFL 亚军", note: "" }
+        ]
+      },
       { name: "南京雄狮", age: "U11", founded: "待确认", coach: "待确认", league: "CYFL" }
     ]
   },
@@ -162,7 +181,11 @@ const citiesData = [
     id: "suzhou", name: "苏州",
     center: [31.2989, 120.5853], color: "#ec4899", region: "华东",
     teams: [
-      { name: "苏州蓝骑士", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" }
+      { name: "苏州蓝骑士", age: "U9 / U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2026春季", age: "U9", title: "DYFL 亚军", note: "" }
+        ]
+      }
     ]
   },
   // 浙江地区
@@ -228,7 +251,11 @@ const citiesData = [
     center: [39.9042, 116.4074], color: "#3b82f6", region: "华北",
     teams: [
       { name: "北京维肯", age: "U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
-      { name: "北京黑曼巴", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL" },
+      { name: "北京黑曼巴", age: "U9 / U11 / U12 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+        honors: [
+          { season: "2026春季", age: "U12", title: "DYFL 亚军", note: "" }
+        ]
+      },
       { name: "北京雄狮", age: "待确认", founded: "待确认", coach: "待确认" }
     ]
   },
