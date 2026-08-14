@@ -7,7 +7,7 @@
   <meta name="keywords" content="青少年橄榄球,美式足球,装备橄榄球,中国橄榄球地图,橄榄球球队">
   <title>中国青少年美式装备橄榄球地图图鉴</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 
@@ -91,7 +91,28 @@
 <!-- 返回全国按钮 -->
 <button id="backBtn" style="display:none;">← 返回全国</button>
 
+<!-- ===== 留言板按钮 ===== -->
+<button id="guestbookBtn" title="留言板" aria-label="留言板">💬</button>
+
+<!-- ===== 留言板面板 ===== -->
+<div id="guestbook" class="guestbook-overlay" aria-hidden="true">
+  <div class="guestbook-panel">
+    <div class="guestbook-header">
+      <span class="guestbook-title">💬 留言板</span>
+      <button id="guestbookClose" class="guestbook-close" aria-label="关闭">×</button>
+    </div>
+    <div class="guestbook-body">
+      <div id="guestbook-list" class="guestbook-list"></div>
+      <div class="guestbook-form">
+        <input type="text" id="guestbookName" placeholder="你的昵称（选填）" maxlength="12" autocomplete="off">
+        <textarea id="guestbookText" placeholder="写下你的留言…" maxlength="200" rows="3"></textarea>
+        <button id="guestbookSubmit" class="guestbook-submit">发表留言</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>

@@ -435,7 +435,7 @@ function renderCity(city, visible) {
                         <div class="honor-item">
                           <span class="honor-season">${season}</span>
                           <span class="honor-title-chip">${title}</span>
-                          <span class="honor-detail">${list.map(h => h.age + (h.note ? `（${h.note}）` : '')).join('、')}</span>
+                          <span class="honor-detail">${list.map(h => `<span class="honor-age-chip">${h.age}${h.note ? `<em class="honor-note-inline">（${h.note}）</em>` : ''}</span>`).join('')}</span>
                         </div>
                       `).join('');
                     }).join('')}
@@ -458,10 +458,28 @@ function renderCity(city, visible) {
         </div>
       `, {
         closeButton: true,
-        maxWidth: 350,
+        maxWidth: window.innerWidth <= 480 ? 300 : 350,
         minWidth: 280,
-        autoPan: true
+        autoPan: true,
+        autoPanPadding: [30, 30],
+        autoPanPaddingTopLeft: [10, 60],
+        autoPanPaddingBottomRight: [10, 90]
       });
+
+    // 移动端：弹窗打开时自动收起控制面板、隐藏图例，避免遮挡弹窗
+    marker.on('popupopen', () => {
+      if (window.innerWidth <= 768) {
+        document.getElementById('control-panel').classList.add('collapsed');
+        const legend = document.getElementById('legend');
+        if (legend) legend.style.display = 'none';
+      }
+    });
+    marker.on('popupclose', () => {
+      if (window.innerWidth <= 768) {
+        const legend = document.getElementById('legend');
+        if (legend) legend.style.display = '';
+      }
+    });
 
     allMarkers[city.id].push(marker);
   });
@@ -710,6 +728,120 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+// ========================
+// GUESTBOOK (留言板)
+// ========================
+const GB_STORAGE_KEY = 'fbmap_guestbook_v1';
+
+function loadGuestbook() {
+  try {
+    return JSON.parse(localStorage.getItem(GB_STORAGE_KEY)) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveGuestbook(list) {
+  try {
+    localStorage.setItem(GB_STORAGE_KEY, JSON.stringify(list));
+  } catch (e) {
+    // localStorage 不可用（隐私模式等），静默失败
+  }
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+function renderGuestbook() {
+  const container = document.getElementById('guestbook-list');
+  if (!container) return;
+  const list = loadGuestbook();
+  if (list.length === 0) {
+    container.innerHTML = '<div class="gb-empty">还没有留言，来抢沙发！🏈</div>';
+    return;
+  }
+  container.innerHTML = list.slice().reverse().map(m => `
+    <div class="gb-item">
+      <div class="gb-item-head">
+        <span class="gb-name">${escapeHtml(m.name || '匿名')}</span>
+        <span class="gb-time">${escapeHtml(m.time || '')}</span>
+      </div>
+      <div class="gb-text">${escapeHtml(m.text)}</div>
+    </div>
+  `).join('');
+}
+
+function openGuestbook() {
+  const overlay = document.getElementById('guestbook');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  renderGuestbook();
+  setTimeout(() => {
+    const text = document.getElementById('guestbookText');
+    if (text && window.innerWidth > 768) text.focus();
+  }, 350);
+}
+
+function closeGuestbook() {
+  const overlay = document.getElementById('guestbook');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+}
+
+function submitGuestbook() {
+  const nameInput = document.getElementById('guestbookName');
+  const textInput = document.getElementById('guestbookText');
+  const text = (textInput.value || '').trim();
+  if (!text) {
+    alert('请输入留言内容');
+    return;
+  }
+  const list = loadGuestbook();
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  list.push({
+    name: (nameInput.value || '').trim() || '匿名',
+    text: text,
+    time: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+  });
+  // 最多保留 200 条
+  if (list.length > 200) list.splice(0, list.length - 200);
+  saveGuestbook(list);
+  textInput.value = '';
+  renderGuestbook();
+}
+
+// 留言板事件绑定
+function initGuestbook() {
+  const btn = document.getElementById('guestbookBtn');
+  const close = document.getElementById('guestbookClose');
+  const submit = document.getElementById('guestbookSubmit');
+  const overlay = document.getElementById('guestbook');
+
+  if (btn) btn.addEventListener('click', openGuestbook);
+  if (close) close.addEventListener('click', closeGuestbook);
+  if (submit) submit.addEventListener('click', submitGuestbook);
+
+  // 点击遮罩关闭
+  if (overlay) {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeGuestbook();
+    });
+  }
+
+  // ESC 关闭
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeGuestbook();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initGuestbook);
 
 // Console info
 console.log('中国青少年美式装备橄榄球地图图鉴');

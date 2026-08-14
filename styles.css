@@ -490,8 +490,8 @@ html, body {
 }
 .popup-honors .honor-item {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
   padding: 6px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -503,41 +503,51 @@ html, body {
   display: inline-block;
   background: rgba(212, 175, 55, 0.18);
   color: var(--gold-light);
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
   font-weight: 700;
   font-size: 11px;
   white-space: nowrap;
   flex-shrink: 0;
-  margin-top: 1px;
 }
 .popup-honors .honor-title-chip {
   display: inline-block;
   background: rgba(46, 213, 115, 0.12);
   color: var(--success);
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
   font-weight: 700;
   font-size: 11px;
   border: 1px solid rgba(46, 213, 115, 0.25);
   white-space: nowrap;
   flex-shrink: 0;
-  margin-top: 1px;
 }
 .popup-honors .honor-detail {
-  color: var(--text-primary);
-  font-size: 12px;
-  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
   flex: 1;
+  min-width: 0;
 }
-.popup-honors .honor-detail .age-with-note {
+.popup-honors .honor-age-chip {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text-primary);
+  padding: 3px 8px;
+  border-radius: 4px;
   font-weight: 600;
-}
-.popup-honors .honor-detail .note-inline {
-  color: var(--text-secondary);
   font-size: 11px;
-  font-style: italic;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+.popup-honors .honor-note-inline {
+  font-style: normal;
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-left: 2px;
+  font-weight: 500;
 }
 .popup-honors .honor-age,
 .popup-honors .honor-title,
@@ -980,4 +990,216 @@ html, body {
   .team-icon img { width: 32px; height: 32px; }
   #legend { padding: 12px; font-size: 12px; }
   .legend-stat-num { font-size: 24px; }
+}
+
+/* ========================
+   GUESTBOOK (留言板)
+   ======================== */
+#guestbookBtn {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+  color: var(--bg-deep);
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35), var(--shadow-lift);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#guestbookBtn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.5), var(--shadow-lift);
+}
+
+.guestbook-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(7, 11, 24, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.guestbook-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.guestbook-panel {
+  width: 100%;
+  max-width: 560px;
+  max-height: 82vh;
+  background: var(--bg-panel-solid);
+  border: 1px solid var(--border-glass);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(30px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1);
+  overflow: hidden;
+}
+.guestbook-overlay.open .guestbook-panel {
+  transform: translateY(0);
+}
+
+.guestbook-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-glass);
+}
+.guestbook-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+.guestbook-close {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.guestbook-close:hover {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--gold);
+  border-color: var(--border-glow);
+}
+
+.guestbook-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+.guestbook-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.gb-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 40px 0;
+}
+.gb-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.gb-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.gb-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+.gb-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.gb-text {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.guestbook-form {
+  border-top: 1px solid var(--border-glass);
+  padding-top: 14px;
+}
+.guestbook-form input,
+.guestbook-form textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  padding: 10px 12px;
+  outline: none;
+  transition: all 0.2s;
+  margin-bottom: 10px;
+  resize: none;
+}
+.guestbook-form input:focus,
+.guestbook-form textarea:focus {
+  border-color: var(--gold-dim);
+  background: rgba(212, 175, 55, 0.05);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.guestbook-form input::placeholder,
+.guestbook-form textarea::placeholder {
+  color: var(--text-muted);
+}
+.guestbook-submit {
+  width: 100%;
+  padding: 11px 0;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+  color: var(--bg-deep);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 1px;
+}
+.guestbook-submit:hover {
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+  transform: translateY(-1px);
+}
+
+/* 留言板移动端适配 */
+@media (max-width: 768px) {
+  #guestbookBtn {
+    bottom: 76px;
+    top: auto;
+    right: 16px;
+    left: auto;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+  .guestbook-panel {
+    max-height: 88vh;
+    border-radius: 18px 18px 0 0;
+  }
+  .guestbook-body {
+    padding: 14px 16px;
+  }
 }
