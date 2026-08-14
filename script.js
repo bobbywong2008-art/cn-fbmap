@@ -128,9 +128,9 @@ const citiesData = [
           { season: "2023春季", age: "U11", title: "Y-League 冠军", note: "" },
           { season: "2023秋季", age: "U11", title: "Y-League 冠军", note: "" },
           { season: "2024春季", age: "U11", title: "Y-League 冠军", note: "" },
-          { season: "2024季后", age: "U9", title: "DYFL 亚军", note: "" },
-          { season: "2024季后", age: "U11", title: "DYFL 冠军", note: "" },
-          { season: "2024季后", age: "U13", title: "DYFL 亚军", note: "" },
+          { season: "2024", age: "U9", title: "DYFL 亚军", note: "" },
+          { season: "2024", age: "U11", title: "DYFL 冠军", note: "" },
+          { season: "2024", age: "U13", title: "DYFL 亚军", note: "" },
           { season: "2025春季", age: "U9", title: "DYFL 亚军", note: "" },
           { season: "2025春季", age: "U11", title: "DYFL 亚军", note: "" },
           { season: "2025春季", age: "U13", title: "DYFL 亚军", note: "" },
@@ -144,7 +144,7 @@ const citiesData = [
           { season: "2021秋季", age: "U13", title: "Y-League 冠军", note: "" },
           { season: "2023春季", age: "U13", title: "Y-League 冠军", note: "" },
           { season: "2024春季", age: "U13", title: "Y-League 冠军", note: "" },
-          { season: "2024季后", age: "U13", title: "DYFL 冠军", note: "" },
+          { season: "2024", age: "U13", title: "DYFL 冠军", note: "" },
           { season: "2025春季", age: "U11", title: "DYFL 冠军", note: "" },
           { season: "2025春季", age: "U13", title: "DYFL 冠军", note: "" },
           { season: "2026春季", age: "U9", title: "DYFL 季军", note: "" },
@@ -156,7 +156,7 @@ const citiesData = [
         honors: [
           { season: "2022秋季", age: "U9", title: "Y-League 冠军", note: "" },
           { season: "2022秋季", age: "U11", title: "Y-League 冠军", note: "" },
-          { season: "2024季后", age: "U9", title: "DYFL 冠军", note: "" },
+          { season: "2024", age: "U9", title: "DYFL 冠军", note: "" },
           { season: "2025春季", age: "U9", title: "DYFL 冠军", note: "" }
         ]
       },
