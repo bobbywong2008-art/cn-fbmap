@@ -425,32 +425,46 @@ function renderCity(city, visible) {
         opacity: 0.95
       })
       .bindPopup(`
-        <div class="popup-card">
-          <div class="popup-header">
-            <img src="${logoUrl}" alt="${team.name} Logo" class="popup-logo" onerror="this.src='${placeholderSVG}'">
-            <h3>${team.name}</h3>
-          </div>
-          <div class="popup-body">
-            <p><strong>城市：</strong><span class="city">${city.name}</span></p>
-            <p><strong>地区：</strong>${city.region}</p>
-            <p><strong>梯队：</strong><span class="age-group">${team.age}</span></p>
-            ${team.league ? `<p><strong>所属联盟：</strong><span class="league-badge">${team.league}</span></p>` : ''}
-            <p><strong>项目：</strong>美式足球（装备）</p>
-            <p><strong>成立：</strong>${team.founded}</p>
-            <p><strong>教练：</strong>${team.coach}</p>
+        <div class="card-popup">
+          <div class="cp-edge"></div>
+          <div class="cp-shine"></div>
+          <div class="cp-inner">
+            <div class="cp-top">
+              <div class="cp-badge">
+                <img src="${logoUrl}" alt="${team.name} Logo" onerror="this.src='${placeholderSVG}'">
+              </div>
+              <div class="cp-headtxt">
+                <h3 class="cp-name">${team.name}</h3>
+                <span class="cp-sub">${city.name} · ${city.region}</span>
+              </div>
+            </div>
+            <div class="cp-row">
+              <span class="cp-chip green">梯队 <b>${team.age}</b></span>
+              ${team.league ? `<span class="cp-chip gold">联盟 ${team.league}</span>` : ''}
+            </div>
+            <div class="cp-body">
+              <p><span class="cp-label">项目</span>美式足球（装备）</p>
+              <p><span class="cp-label">成立</span>${team.founded}</p>
+              <p><span class="cp-label">教练</span>${team.coach}</p>
+            </div>
             ${team.honors && team.honors.length > 0 ? (() => {
               const grouped = team.honors.reduce((acc, h) => {
                 if (!acc[h.season]) acc[h.season] = [];
                 acc[h.season].push(h);
                 return acc;
               }, {});
+              const medalCls = (t) => {
+                if (t.indexOf('亚军') > -1) return 's';
+                if (t.indexOf('季军') > -1) return 'b';
+                return 'g';
+              };
               return `
-                <div class="popup-honors">
-                  <div class="honors-header" onclick="window.toggleHonors(this)">
-                    <span class="honors-title">🏆 荣誉 (${team.honors.length})</span>
-                    <span class="honors-arrow">▼</span>
+                <div class="cp-honors">
+                  <div class="cp-honors-head" onclick="window.toggleHonors(this)">
+                    <span>🏆 成就 (${team.honors.length})</span>
+                    <span class="cp-arrow">▼</span>
                   </div>
-                  <div class="honors-list collapsed">
+                  <div class="cp-honors-list collapsed">
                     ${Object.entries(grouped).map(([season, honors]) => {
                       const byTitle = honors.reduce((acc, h) => {
                         const t = h.title || '冠军';
@@ -459,10 +473,9 @@ function renderCity(city, visible) {
                         return acc;
                       }, {});
                       return Object.entries(byTitle).map(([title, list]) => `
-                        <div class="honor-item">
-                          <span class="honor-season">${season}</span>
-                          <span class="honor-title-chip">${title}</span>
-                          <span class="honor-detail">${list.map(h => `<span class="honor-age-chip">${h.age}${h.note ? `<em class="honor-note-inline">（${h.note}）</em>` : ''}</span>`).join('')}</span>
+                        <div class="cp-honor-item">
+                          <span class="cp-medal ${medalCls(title)}"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.2 1.3-6.6L2.5 9l6.6-.8L12 2z" fill="currentColor"/></svg></span>
+                          <span class="cp-honor-txt"><b>${season}</b> ${title}<small>${list.map(h => h.age + (h.note ? `（${h.note}）` : '')).join('、')}</small></span>
                         </div>
                       `).join('');
                     }).join('')}
@@ -470,22 +483,15 @@ function renderCity(city, visible) {
                 </div>
               `;
             })() : ''}
-          </div>
-          <div class="popup-actions">
-            <button class="popup-btn" onclick="zoomToCity('${city.id}'); map.closePopup();">
-              定位城市
-            </button>
-            <button class="popup-btn secondary" onclick="shareTeam('${team.name}', '${city.name}')">
-              分享
-            </button>
-          </div>
-          <div class="popup-footer">
-            <em>点击地图其他区域关闭弹窗</em>
+            <div class="cp-actions">
+              <button class="cp-btn primary" onclick="zoomToCity('${city.id}'); map.closePopup();">定位城市</button>
+              <button class="cp-btn ghost" onclick="shareTeam('${team.name}', '${city.name}')">分享</button>
+            </div>
           </div>
         </div>
       `, {
         closeButton: true,
-        maxWidth: window.innerWidth <= 480 ? 300 : 350,
+        maxWidth: window.innerWidth <= 480 ? 310 : 340,
         minWidth: 280,
         autoPan: true,
         autoPanPadding: [30, 30],
@@ -493,12 +499,31 @@ function renderCity(city, visible) {
         autoPanPaddingBottomRight: [10, 90]
       });
 
-    // 移动端：弹窗打开时自动收起控制面板、隐藏图例，避免遮挡弹窗
+    // 弹窗打开：移动端收起面板/隐藏图例；桌面端启用3D鼠标跟随
     marker.on('popupopen', () => {
       if (window.innerWidth <= 768) {
         document.getElementById('control-panel').classList.add('collapsed');
         const legend = document.getElementById('legend');
         if (legend) legend.style.display = 'none';
+      } else {
+        const popupEl = marker.getPopup() ? marker.getPopup().getElement() : null;
+        const card = popupEl ? popupEl.querySelector('.card-popup') : null;
+        if (card && !card._tiltBound) {
+          card._tiltBound = true;
+          const onMove = (e) => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = 'rotateY(' + (x * 8).toFixed(2) + 'deg) rotateX(' + (-y * 6).toFixed(2) + 'deg)';
+          };
+          const onLeave = () => { card.style.transform = ''; };
+          popupEl.addEventListener('mousemove', onMove);
+          popupEl.addEventListener('mouseleave', onLeave);
+          card._cleanup = () => {
+            popupEl.removeEventListener('mousemove', onMove);
+            popupEl.removeEventListener('mouseleave', onLeave);
+          };
+        }
       }
     });
     marker.on('popupclose', () => {
@@ -618,9 +643,10 @@ function resetToNational() {
 // Toggle honors dropdown
 window.toggleHonors = function(header) {
   const list = header.nextElementSibling;
-  const arrow = header.querySelector('.honors-arrow');
+  const arrow = header.querySelector('.cp-arrow, .honors-arrow');
+  if (!list) return;
   list.classList.toggle('collapsed');
-  arrow.textContent = list.classList.contains('collapsed') ? '▼' : '▲';
+  if (arrow) arrow.textContent = list.classList.contains('collapsed') ? '▼' : '▲';
 };
 
 // Share function

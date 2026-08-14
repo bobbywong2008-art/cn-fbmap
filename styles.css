@@ -736,158 +736,122 @@ html, body {
 }
 
 /* ========================
-   POPUP CARD
+   POPUP 球星卡 (Card Popup)
    ======================== */
+.leaflet-popup { perspective: 900px; }
 .leaflet-popup-content-wrapper {
-  background: var(--bg-panel-solid) !important;
+  background: transparent !important;
   color: var(--text-primary) !important;
   border-radius: 18px !important;
-  border: 1px solid var(--border-glass) !important;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: cpCardIn .7s cubic-bezier(.34, 1.3, .64, 1) both;
 }
 .leaflet-popup-content {
   margin: 0 !important;
   padding: 0 !important;
+  width: auto !important;
 }
 .leaflet-popup-tip {
-  background: var(--bg-panel-solid) !important;
-  border: 1px solid var(--border-glass) !important;
+  background: #101a30 !important;
+  border: 1px solid rgba(212, 175, 55, .3) !important;
 }
 .leaflet-popup-close-button {
   color: var(--text-muted) !important;
   font-size: 20px !important;
   padding: 8px 10px !important;
-  transition: color 0.2s;
+  transition: color .2s;
+  z-index: 10;
 }
-.leaflet-popup-close-button:hover {
-  color: var(--gold) !important;
-}
+.leaflet-popup-close-button:hover { color: var(--gold) !important; }
 
-.popup-card {
-  min-width: 280px;
-  max-width: 320px;
-  padding: 18px 20px 16px;
+.card-popup {
+  position: relative;
+  width: 310px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #1a2440 0%, #0d1426 55%, #0a0f1e 100%);
+  border: 1px solid rgba(212, 175, 55, .45);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .04) inset, 0 0 30px rgba(212, 175, 55, .12);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform .18s ease-out;
 }
+.card-popup .cp-edge {
+  position: absolute; inset: 0; border-radius: 18px; padding: 1px; pointer-events: none; z-index: 3;
+  background: linear-gradient(140deg, rgba(240, 199, 94, .8), rgba(212, 175, 55, .15) 40%, rgba(240, 199, 94, .6));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.card-popup .cp-shine {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0) 30%, rgba(240, 199, 94, .16) 46%, rgba(255, 255, 255, 0) 60%);
+  animation: cpShine .9s ease .15s both;
+}
+.card-popup .cp-inner { padding: 16px 16px 14px; position: relative; z-index: 1; }
+.card-popup .cp-top { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(212, 175, 55, .22); }
+.card-popup .cp-badge {
+  width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; position: relative;
+  background: radial-gradient(circle at 32% 30%, #2b3a66, #0e1526 70%);
+  border: 2px solid #d4af37; box-shadow: 0 0 0 3px rgba(212, 175, 55, .2), 0 4px 14px rgba(0, 0, 0, .5);
+  display: flex; align-items: center; justify-content: center;
+  animation: cpPop .6s cubic-bezier(.34, 1.56, .64, 1) .28s both;
+}
+.card-popup .cp-badge::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; border: 1px dashed rgba(212, 175, 55, .5); }
+.card-popup .cp-badge img { width: 34px; height: 34px; object-fit: contain; border-radius: 50%; position: relative; z-index: 1; }
+.card-popup .cp-name { font-size: 16px; font-weight: 800; color: #f0c75e; letter-spacing: .4px; margin: 0; }
+.card-popup .cp-sub { font-size: 11px; color: #a0aec0; margin: 3px 0 0; letter-spacing: 1px; display: block; }
+.card-popup .cp-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.card-popup .cp-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: #f0f2f5; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .12); border-radius: 6px; padding: 4px 9px; }
+.card-popup .cp-chip b { font-weight: 700; }
+.card-popup .cp-chip.green { background: rgba(46, 213, 115, .13); color: #2ed573; border-color: rgba(46, 213, 115, .3); }
+.card-popup .cp-chip.gold { background: rgba(212, 175, 55, .16); color: #f0c75e; border-color: rgba(212, 175, 55, .35); }
+.card-popup .cp-body { font-size: 12px; color: #a0aec0; line-height: 1.9; margin-top: 8px; }
+.card-popup .cp-body p { margin: 2px 0; display: flex; }
+.card-popup .cp-label { color: var(--text-muted); min-width: 40px; flex-shrink: 0; }
+.card-popup .cp-honors { margin-top: 10px; border-radius: 12px; background: linear-gradient(135deg, rgba(212, 175, 55, .1), rgba(212, 175, 55, .02)); border: 1px solid rgba(212, 175, 55, .25); padding: 9px 12px; }
+.card-popup .cp-honors-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #f0c75e; font-weight: 700; letter-spacing: .4px; cursor: pointer; user-select: none; }
+.card-popup .cp-honors-head .cp-arrow { font-size: 10px; transition: transform .2s; }
+.card-popup .cp-honors-list { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; max-height: 170px; overflow-y: auto; transition: max-height .25s ease, opacity .2s ease, margin .2s ease; opacity: 1; }
+.card-popup .cp-honors-list.collapsed { max-height: 0; opacity: 0; margin-top: 0; overflow: hidden; }
+.card-popup .cp-honor-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid rgba(255, 255, 255, .05); }
+.card-popup .cp-honor-item:last-child { border-bottom: none; }
+.card-popup .cp-medal { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #0d1426; }
+.card-popup .cp-medal svg { width: 14px; height: 14px; }
+.card-popup .cp-medal.g { background: linear-gradient(140deg, #f7d774, #b8860b); box-shadow: 0 2px 8px rgba(212, 175, 55, .5); }
+.card-popup .cp-medal.s { background: linear-gradient(140deg, #e8e8e8, #9aa0a6); box-shadow: 0 2px 8px rgba(180, 180, 180, .4); }
+.card-popup .cp-medal.b { background: linear-gradient(140deg, #d9a066, #a0602f); box-shadow: 0 2px 8px rgba(200, 140, 80, .4); }
+.card-popup .cp-honor-txt { font-size: 11px; color: #f0f2f5; line-height: 1.4; }
+.card-popup .cp-honor-txt b { color: #f0c75e; font-weight: 700; margin-right: 2px; }
+.card-popup .cp-honor-txt small { color: #8a93a8; display: block; font-size: 10px; margin-top: 1px; }
+.card-popup .cp-actions { display: flex; gap: 8px; margin-top: 12px; }
+.card-popup .cp-btn { flex: 1; padding: 9px 0; border-radius: 10px; font-size: 12px; font-weight: 700; text-align: center; letter-spacing: .3px; cursor: pointer; font-family: inherit; transition: all .2s; border: none; }
+.card-popup .cp-btn.primary { background: linear-gradient(135deg, #f0c75e, #a88a2e); color: #0d1426; box-shadow: 0 4px 16px rgba(212, 175, 55, .35); }
+.card-popup .cp-btn.primary:hover { box-shadow: 0 6px 22px rgba(212, 175, 55, .5); transform: translateY(-1px); }
+.card-popup .cp-btn.ghost { background: rgba(255, 255, 255, .06); color: #a0aec0; border: 1px solid rgba(255, 255, 255, .12); }
+.card-popup .cp-btn.ghost:hover { background: rgba(255, 255, 255, .1); color: #f0f2f5; }
 
-.popup-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-glass);
+/* 入场动画 */
+@keyframes cpCardIn {
+  0% { opacity: 0; transform: translateZ(-140px) rotateX(50deg) rotateZ(-5deg) scale(.55); }
+  55% { opacity: 1; transform: translateZ(20px) rotateX(-7deg) rotateZ(2deg) scale(1.04); }
+  75% { transform: translateZ(0) rotateX(3deg) rotateZ(0) scale(.99); }
+  100% { opacity: 1; transform: translateZ(0) rotateX(0) rotateZ(0) scale(1); }
 }
+@keyframes cpShine { 0% { transform: translateX(-120%); } 60%, 100% { transform: translateX(120%); } }
+@keyframes cpPop { 0% { opacity: 0; transform: scale(.4) rotate(-12deg); } 70% { transform: scale(1.15) rotate(4deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes cpRise { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
 
-.popup-header h3 {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-  letter-spacing: 0.3px;
-}
-
-.popup-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
-  margin-right: 16px;
-  object-fit: contain;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 5px;
-  border: 1px solid var(--border-glass);
-}
-
-.popup-body {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 2;
-}
-
-.popup-body p { margin: 3px 0; }
-.popup-body strong {
-  color: var(--text-primary);
-  font-weight: 600;
-  display: inline-block;
-  min-width: 50px;
-}
-
-.popup-body .city {
-  display: inline-block;
-  background: rgba(212, 175, 55, 0.12);
-  color: var(--gold-light);
-  padding: 2px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-.popup-body .age-group {
-  display: inline-block;
-  background: rgba(46, 213, 115, 0.1);
-  color: var(--success);
-  padding: 2px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1px solid rgba(46, 213, 115, 0.2);
-}
-
-.popup-body .league-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.06) 100%);
-  color: var(--gold-light);
-  padding: 2px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-.popup-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.popup-btn {
-  flex: 1;
-  padding: 9px 12px;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
-  color: var(--bg-deep);
-  border: none;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-  font-family: inherit;
-  letter-spacing: 0.3px;
-}
-.popup-btn:hover {
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
-  transform: translateY(-1px);
-}
-
-.popup-btn.secondary {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-glass);
-}
-.popup-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-}
-
-.popup-footer {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 11px;
-  color: var(--text-muted);
-}
+.card-popup .cp-row { animation: cpRise .5s ease .42s both; }
+.card-popup .cp-body { animation: cpRise .5s ease .5s both; }
+.card-popup .cp-honors { animation: cpRise .5s ease .58s both; }
+.card-popup .cp-actions { animation: cpRise .5s ease .68s both; }
+.card-popup .cp-honor-item { animation: cpRise .4s ease both; }
+.card-popup .cp-honor-item:nth-child(2) { animation-delay: .64s; }
+.card-popup .cp-honor-item:nth-child(3) { animation-delay: .74s; }
+.card-popup .cp-honor-item:nth-child(4) { animation-delay: .84s; }
+.card-popup .cp-honor-item:nth-child(5) { animation-delay: .94s; }
 
 /* ========================
    LEAFLET ZOOM CONTROLS
@@ -971,11 +935,20 @@ html, body {
     margin-top: -8px !important;
   }
 
-  .popup-card {
-    min-width: 240px;
-    font-size: 12px;
-    padding: 14px 16px 12px;
-  }
+  /* 移动端：球星卡简化入场动画 + 卡片全宽 */
+  .leaflet-popup { perspective: none; }
+  .leaflet-popup-content-wrapper { animation: cpMobileIn .45s ease both; }
+  .card-popup { width: min(310px, calc(100vw - 40px)); transition: none; }
+  .card-popup .cp-shine { animation: cpShine .8s ease .1s both; }
+  .card-popup .cp-badge { animation: cpPop .5s cubic-bezier(.34, 1.56, .64, 1) .2s both; }
+  .card-popup .cp-row { animation: cpRise .4s ease .3s both; }
+  .card-popup .cp-body { animation: cpRise .4s ease .38s both; }
+  .card-popup .cp-honors { animation: cpRise .4s ease .46s both; }
+  .card-popup .cp-actions { animation: cpRise .4s ease .54s both; }
+  .card-popup .cp-honor-item:nth-child(2) { animation-delay: .5s; }
+  .card-popup .cp-honor-item:nth-child(3) { animation-delay: .58s; }
+  .card-popup .cp-honor-item:nth-child(4) { animation-delay: .66s; }
+  .card-popup .cp-honor-item:nth-child(5) { animation-delay: .74s; }
 
   #backBtn {
     padding: 7px 14px;
@@ -983,6 +956,11 @@ html, body {
     top: 10px;
     right: 10px;
   }
+}
+
+@keyframes cpMobileIn {
+  0% { opacity: 0; transform: translateY(26px) scale(.92); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (max-width: 480px) {
