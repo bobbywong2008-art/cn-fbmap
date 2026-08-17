@@ -17,7 +17,7 @@ const teamLogos = {
   "佛山小兕虎": "logos/foshan-xiaoxihu.png",
   "珠海海东青": "logos/zhuhai-gyrfalcon.png",
   "深圳鲲鹏": "logos/shenzhen-kunpeng.png",
-  "广州八爪鱼": "logos/guangzhou-octopus.png",
+  "广州黑骑士": "logos/guangzhou-blackknight.png",
   "深圳热浪": "logos/shenzhen-heatwave.png",
   "深圳火箭熊": "logos/shenzhen-rocketbear.png",
   "上海烽火狼": "logos/shanghai-firewolf.png",
@@ -76,7 +76,7 @@ const citiesData = [
         ]
       },
       { name: "广州白鳍豚", age: "U13", founded: "待确认", coach: "待确认", league: "CYFL" },
-      { name: "广州八爪鱼", age: "U10", founded: "待确认", coach: "待确认" }
+      { name: "广州黑骑士", age: "U10", founded: "待确认", coach: "待确认" }
     ]
   },
   {
@@ -105,7 +105,7 @@ const citiesData = [
     id: "foshan", name: "佛山",
     center: [23.0215, 113.1214], color: "#8b5cf6", region: "华南",
     teams: [
-      { name: "佛山小兕虎", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "康师傅，肥鸡", league: "CYFL",
+      { name: "佛山小兕虎", age: "U9 / U11 / U13 / U15", founded: "2017", coach: "康师傅，肥鸡", league: "CYFL",
         honors: [
           { season: "2024-25", age: "U13", title: "Y-League 冠军", note: "" },
           { season: "2022", age: "U10", title: "广东省橄榄球锦标赛 冠军", note: "佛山南海天行达阵俱乐部" },
@@ -166,7 +166,7 @@ const citiesData = [
           { season: "2026春季", age: "U13", title: "DYFL 季军", note: "" }
         ]
       },
-      { name: "上海银河", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
+      { name: "上海银河", age: "U9 / U11 / U13 / U15", founded: "2021-9", coach: "Stone, Josh", league: "CYFL",
         honors: [
           { season: "2021秋季", age: "U11", title: "Y-League 冠军", note: "" },
           { season: "2021秋季", age: "U13", title: "Y-League 冠军", note: "" },
@@ -281,7 +281,7 @@ const citiesData = [
         ]
       },
       { name: "武汉赤焰", age: "待确认", founded: "待确认", coach: "待确认" },
-      { name: "武汉猎豹", age: "U11 / U13", founded: "待确认", coach: "待确认", league: "CYFL" }
+      { name: "武汉猎豹", age: "U11 / U13", founded: "2026", coach: "待确认", league: "CYFL" }
     ]
   },
   // 北京
