@@ -336,7 +336,10 @@ const map = L.map('map', {
   preferCanvas: true,
   zoomSnap: 0.5,
   wheelPxPerZoomLevel: 120
-}).setView([35.8, 104.1], 4);
+});
+
+// 初始视野：自动框住全部 16 个城市（fitBounds），避免四周大片空白
+const nationalBounds = L.latLngBounds(citiesData.map(c => c.center));
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution: '',
@@ -368,7 +371,8 @@ function calculateTeamPositions(center, teamCount) {
   if (teamCount === 1) return [center];
 
   const positions = [];
-  const baseRadius = 0.08 + teamCount * 0.006;
+  // 紧凑布局：半径较原版缩小约 40%，球队标记更贴城市中心
+  const baseRadius = (0.08 + teamCount * 0.006) * 0.6;
   const goldenAngle = Math.PI * (3 - Math.sqrt(5));
 
   for (let i = 0; i < teamCount; i++) {
@@ -422,6 +426,25 @@ function renderCity(city, visible) {
 
   allMarkers[city.id] = [];
   allConnectors[city.id] = [];
+
+  // 城市中心发光点 + 城市名（hover 显示球队数）
+  const cityIcon = L.divIcon({
+    className: 'city-center-marker',
+    html: `
+      <div class="city-center" style="--cc:${city.color}">
+        <span class="city-center-dot"></span>
+        <span class="city-center-name">${city.name}</span>
+      </div>
+    `,
+    iconSize: [0, 0],
+    iconAnchor: [0, 0]
+  });
+  const cityMarker = L.marker(city.center, { icon: cityIcon, interactive: false, keyboard: false })
+    .addTo(map)
+    .bindTooltip(`${city.name} · ${filteredTeams.length} 支球队`, {
+      direction: 'top', offset: [0, -14], className: 'team-tooltip', opacity: 0.95
+    });
+  allMarkers[city.id].push(cityMarker);
 
   // 绘制连接线 (only if >1 team)
   if (filteredTeams.length > 1) {
@@ -676,7 +699,7 @@ function zoomToCity(cityId) {
 function resetToNational() {
   activeCityId = null;
   document.getElementById('backBtn').style.display = 'none';
-  map.flyTo([35.8, 104.1], 4, { duration: 1 });
+  map.flyToBounds(nationalBounds, { padding: [40, 40], maxZoom: 6.5, duration: 1 });
   applyFilters();
 }
 
@@ -799,6 +822,19 @@ function initCityFilters() {
 function init() {
   initCityFilters();
   applyFilters();
+
+  // 初始视野：fitBounds 框住全部城市，四周无大片空白
+  map.fitBounds(nationalBounds, { padding: [40, 40], maxZoom: 6.5 });
+
+  // 城市名只在放大到 zoom>=6 时显示（低缩放避免珠三角等地名重叠）
+  const updateCityNames = () => {
+    const show = map.getZoom() >= 6;
+    document.querySelectorAll('.city-center-name').forEach(el => {
+      el.style.display = show ? '' : 'none';
+    });
+  };
+  updateCityNames();
+  map.on('zoomend', updateCityNames);
 
   // Hide loading
   setTimeout(() => {
