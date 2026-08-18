@@ -439,7 +439,7 @@ function renderCity(city, visible) {
     iconSize: [0, 0],
     iconAnchor: [0, 0]
   });
-  const cityMarker = L.marker(city.center, { icon: cityIcon, interactive: false, keyboard: false })
+  const cityMarker = L.marker(city.center, { icon: cityIcon, interactive: false, keyboard: false, pane: 'cityCenterPane' })
     .addTo(map)
     .bindTooltip(`${city.name} · ${filteredTeams.length} 支球队`, {
       direction: 'top', offset: [0, -14], className: 'team-tooltip', opacity: 0.95
@@ -820,6 +820,10 @@ function initCityFilters() {
 // INIT
 // ========================
 function init() {
+  // 创建城市中心专用 pane（z-index 高于所有球队标记 markerPane=600，确保城市点可见）
+  map.createPane('cityCenterPane');
+  map.getPane('cityCenterPane').style.zIndex = 650;
+
   initCityFilters();
   applyFilters();
 

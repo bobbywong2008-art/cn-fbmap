@@ -673,26 +673,26 @@ html, body {
 }
 .city-center-dot {
   position: absolute;
-  left: -6px;
-  top: -6px;
-  width: 12px;
-  height: 12px;
+  left: -10px;
+  top: -10px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ffffff, var(--cc, #d4af37) 72%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 10px var(--cc, #d4af37), 0 0 22px rgba(0, 0, 0, 0.35);
+  background: radial-gradient(circle at 35% 30%, #ffffff, var(--cc, #d4af37) 70%);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 14px var(--cc, #d4af37), 0 0 28px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(0, 0, 0, 0.3);
   pointer-events: none;
 }
 .city-center-name {
   position: absolute;
-  left: 10px;
-  top: -9px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #e8ecf5;
+  left: 16px;
+  top: -10px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #ffffff;
   letter-spacing: 0.5px;
   white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 6px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 8px rgba(0, 0, 0, 0.8), 0 0 12px var(--cc, rgba(212, 175, 55, 0.4));
   pointer-events: none;
 }
 
