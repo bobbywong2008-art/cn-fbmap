@@ -427,11 +427,13 @@ function renderCity(city, visible) {
   allMarkers[city.id] = [];
   allConnectors[city.id] = [];
 
-  // 城市中心发光点 + 城市名（hover 显示球队数）
+  // 城市中心发光点 + 脉冲光环 + 城市名（hover 显示球队数）
   const cityIcon = L.divIcon({
     className: 'city-center-marker',
     html: `
       <div class="city-center" style="--cc:${city.color}">
+        <span class="city-center-ring"></span>
+        <span class="city-center-ring r2"></span>
         <span class="city-center-dot"></span>
         <span class="city-center-name">${city.name}</span>
       </div>
@@ -446,15 +448,16 @@ function renderCity(city, visible) {
     });
   allMarkers[city.id].push(cityMarker);
 
-  // 绘制连接线 (only if >1 team)
+  // 绘制连接线 (only if >1 team) —— 用 SVG 渲染器以支持流动动画
   if (filteredTeams.length > 1) {
     teamPositions.forEach(position => {
       const connector = L.polyline([city.center, position], {
-        className: 'city-connector',
+        className: 'city-connector flow',
         color: city.color,
         weight: 1.5,
         opacity: 0.4,
-        smoothFactor: 1
+        smoothFactor: 1,
+        renderer: L.svg()
       }).addTo(map);
       allConnectors[city.id].push(connector);
     });
