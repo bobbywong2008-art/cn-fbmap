@@ -144,10 +144,10 @@ const citiesData = [
           { season: "2023秋季", age: "U9", title: "Y-League 冠军", note: "上海朱雀" },
           { season: "2023秋季", age: "U13", title: "Y-League 冠军", note: "上海朱雀" },
           { season: "2024春季", age: "U9", title: "Y-League 冠军", note: "上海朱雀" },
-          { season: "2024-25", age: "U11", title: "Y-League 冠军", note: "" },
-          { season: "2024-25", age: "U14", title: "Y-League 冠军", note: "" },
-          { season: "2025-26", age: "U9", title: "Y-League 冠军", note: "" },
-          { season: "2025-26", age: "U13", title: "Y-League 冠军", note: "" },
+          { season: "2024-25", age: "U11", title: "Y-League 冠军", note: "上海鹰蓝" },
+          { season: "2024-25", age: "U14", title: "Y-League 冠军", note: "上海鹰蓝" },
+          { season: "2025-26", age: "U9", title: "Y-League 冠军", note: "上海鹰蓝" },
+          { season: "2025-26", age: "U13", title: "Y-League 冠军", note: "上海鹰蓝" },
           { season: "2025-26", age: "U15", title: "Y-League 亚军", note: "" }
         ]
       },
