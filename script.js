@@ -115,7 +115,8 @@ const citiesData = [
           { season: "2023", age: "U18", title: "广东省橄榄球锦标赛 亚军", note: "南海天行达阵小兕虎队" },
           { season: "2024", age: "U9", title: "广东省橄榄球锦标赛 冠军", note: "" },
           { season: "2024", age: "U11", title: "广东省橄榄球锦标赛 季军", note: "" },
-          { season: "2024", age: "U13", title: "广东省橄榄球锦标赛 冠军", note: "" }
+          { season: "2024", age: "U13", title: "广东省橄榄球锦标赛 冠军", note: "" },
+          { season: "2025-26", age: "U11", title: "Y-League 亚军", note: "" }
         ]
       }
     ]
@@ -146,7 +147,8 @@ const citiesData = [
           { season: "2024-25", age: "U11", title: "Y-League 冠军", note: "" },
           { season: "2024-25", age: "U14", title: "Y-League 冠军", note: "" },
           { season: "2025-26", age: "U9", title: "Y-League 冠军", note: "" },
-          { season: "2025-26", age: "U13", title: "Y-League 冠军", note: "" }
+          { season: "2025-26", age: "U13", title: "Y-League 冠军", note: "" },
+          { season: "2025-26", age: "U15", title: "Y-League 亚军", note: "" }
         ]
       },
       { name: "上海蓝魔", age: "U11 / U13", founded: "待确认", coach: "待确认" },
@@ -185,7 +187,8 @@ const citiesData = [
           { season: "2022秋季", age: "U9", title: "Y-League 冠军", note: "" },
           { season: "2022秋季", age: "U11", title: "Y-League 冠军", note: "" },
           { season: "2024", age: "U9", title: "DYFL 冠军", note: "" },
-          { season: "2025春季", age: "U9", title: "DYFL 冠军", note: "" }
+          { season: "2025春季", age: "U9", title: "DYFL 冠军", note: "" },
+          { season: "2025-26", age: "U9", title: "Y-League 亚军", note: "" }
         ]
       },
       { name: "上海AFA鲨鱼", age: "U9 / U11 / U12 / U13 / U15", founded: "待确认", coach: "待确认", league: "CYFL",
@@ -271,7 +274,8 @@ const citiesData = [
     teams: [
       { name: "武汉change巴萨卡", age: "U9 / U11 / U13 / U15", founded: "待确认", coach: "待确认",
         honors: [
-          { season: "2023春季", age: "U9", title: "Y-League 冠军", note: "武汉战隼" }
+          { season: "2023春季", age: "U9", title: "Y-League 冠军", note: "武汉战隼" },
+          { season: "2025-26", age: "U13", title: "Y-League 亚军", note: "" }
         ]
       },
       { name: "武汉change眼镜蛇", age: "U11", founded: "待确认", coach: "待确认",
