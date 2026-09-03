@@ -7,7 +7,7 @@
   <meta name="keywords" content="青少年橄榄球,美式足球,装备橄榄球,中国橄榄球地图,橄榄球球队">
   <title>中国青少年美式装备橄榄球地图图鉴</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=15">
+  <link rel="stylesheet" href="styles.css?v=16">
 </head>
 <body>
 
@@ -27,6 +27,14 @@
   <span>中国青少年美式装备橄榄球地图图鉴</span>
   <span class="title-badge">全国 40 支球队</span>
 </div>
+
+<!-- CYFL 2026-2027 赛程横幅（醒目入口） -->
+<button id="cyflBanner">
+  <span class="cb-ic">🏆</span>
+  <span class="cb-t">CYFL 2026-2027 常规赛 · 赛程 &amp; 积分榜</span>
+  <span class="cb-s">点击查看</span>
+  <span class="cb-arr">›</span>
+</button>
 
 <!-- ===== 筛选面板 ===== -->
 <div id="control-panel">
@@ -94,9 +102,6 @@
 <!-- ===== 留言板按钮 ===== -->
 <button id="guestbookBtn" title="留言板" aria-label="留言板">💬</button>
 
-<!-- ===== 赛程/积分榜按钮 ===== -->
-<button id="scheduleBtn" title="赛程积分" aria-label="赛程积分">🏆</button>
-
 <!-- ===== 留言板面板 ===== -->
 <div id="guestbook" class="guestbook-overlay" aria-hidden="true">
   <div class="guestbook-panel">
@@ -115,28 +120,34 @@
   </div>
 </div>
 
-<!-- ===== 赛程/积分榜面板 ===== -->
-<div id="schedule" class="sch-overlay" aria-hidden="true">
-  <div class="sch-panel">
-    <div class="sch-header">
-      <span class="sch-title">🏆 CYFL 2026-2027</span>
-      <div class="sch-tabs">
-        <button class="sch-tab active" data-tab="schedule">赛程表</button>
-        <button class="sch-tab" data-tab="standings">积分榜</button>
+<!-- ===== 赛程/积分榜 全屏视图 ===== -->
+<div id="scheduleView">
+  <div class="sch-top">
+    <div class="sch-top-inner">
+      <button class="sch-back" id="schBack">← 返回地图</button>
+      <div class="sch-top-title">
+        <span class="sch-top-ic">🏆</span>
+        <div>
+          <div class="sch-top-h">CYFL 2026-2027 常规赛</div>
+          <div class="sch-top-sub">赛程表 · 积分榜 · 点球队名直达地图</div>
+        </div>
       </div>
-      <div class="sch-ages">
+      <div class="sch-nav">
+        <button class="sch-viewtab active" data-tab="schedule">赛程表</button>
+        <button class="sch-viewtab" data-tab="standings">积分榜</button>
+      </div>
+      <div class="sch-agepill">
         <button class="sch-age active" data-age="U15">U15</button>
         <button class="sch-age" data-age="U13">U13</button>
         <button class="sch-age" data-age="U11">U11</button>
         <button class="sch-age" data-age="U9">U9</button>
       </div>
-      <button id="scheduleClose" class="sch-close" aria-label="关闭">×</button>
     </div>
-    <div class="sch-body" id="scheduleBody"></div>
   </div>
+  <div class="sch-body" id="schBody"></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="script.js?v=17"></script>
+<script src="script.js?v=18"></script>
 </body>
 </html>
