@@ -7,7 +7,7 @@
   <meta name="keywords" content="青少年橄榄球,美式足球,装备橄榄球,中国橄榄球地图,橄榄球球队">
   <title>中国青少年美式装备橄榄球地图图鉴</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=14">
 </head>
 <body>
 
@@ -94,6 +94,9 @@
 <!-- ===== 留言板按钮 ===== -->
 <button id="guestbookBtn" title="留言板" aria-label="留言板">💬</button>
 
+<!-- ===== 赛程/积分榜按钮 ===== -->
+<button id="scheduleBtn" title="赛程积分" aria-label="赛程积分">🏆</button>
+
 <!-- ===== 留言板面板 ===== -->
 <div id="guestbook" class="guestbook-overlay" aria-hidden="true">
   <div class="guestbook-panel">
@@ -112,7 +115,28 @@
   </div>
 </div>
 
+<!-- ===== 赛程/积分榜面板 ===== -->
+<div id="schedule" class="sch-overlay" aria-hidden="true">
+  <div class="sch-panel">
+    <div class="sch-header">
+      <span class="sch-title">🏆 CYFL 2026-2027</span>
+      <div class="sch-tabs">
+        <button class="sch-tab active" data-tab="schedule">赛程表</button>
+        <button class="sch-tab" data-tab="standings">积分榜</button>
+      </div>
+      <div class="sch-ages">
+        <button class="sch-age active" data-age="U15">U15</button>
+        <button class="sch-age" data-age="U13">U13</button>
+        <button class="sch-age" data-age="U11">U11</button>
+        <button class="sch-age" data-age="U9">U9</button>
+      </div>
+      <button id="scheduleClose" class="sch-close" aria-label="关闭">×</button>
+    </div>
+    <div class="sch-body" id="scheduleBody"></div>
+  </div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="script.js?v=16"></script>
+<script src="script.js?v=17"></script>
 </body>
 </html>

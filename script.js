@@ -341,6 +341,7 @@ const map = L.map('map', {
   zoomSnap: 0.5,
   wheelPxPerZoomLevel: 120
 });
+window._map = map;
 
 // 初始视野：自动框住全部 16 个城市（fitBounds），避免四周大片空白
 const nationalBounds = L.latLngBounds(citiesData.map(c => c.center));
@@ -987,3 +988,170 @@ document.addEventListener('DOMContentLoaded', initGuestbook);
 console.log('中国青少年美式装备橄榄球地图图鉴');
 console.log(`  ${totalCities} 个城市 · ${totalTeams} 支球队`);
 console.log('  数据来源：各地俱乐部公开信息');
+// ========================
+// CYFL 2026-2027 赛程 + 积分榜
+// ========================
+const SCHEDULE_DATA = {"_note": "148 场手工读，U15/U13 较准，U11/U9 待校对", "stations": [{"id": "S1", "city": "杭州", "date": "2026.10.3-10.4"}, {"id": "S2", "city": "上海", "date": "10.24-10.25"}, {"id": "S3", "city": "青岛", "date": "10.31-11.01"}, {"id": "S4", "city": "上海", "date": "11.21-11.22"}, {"id": "S5", "city": "武汉", "date": "12.05-12.06"}, {"id": "S6", "city": "广州", "date": "12.19-12.20"}, {"id": "S7", "city": "佛山", "date": "2027.3.6-3.7"}, {"id": "S8", "city": "上海", "date": "3.13-3.14"}, {"id": "S9", "city": "南京", "date": "3.20-3.21"}, {"id": "S10", "city": "苏州", "date": "4.03-4.04"}, {"id": "S11", "city": "北京", "date": "4.24-4.25"}, {"id": "S12", "city": "上海", "date": "5.01-5.02"}, {"id": "S13", "city": "深圳", "date": "5.03-5.04"}], "teams": {"U9": ["U9成都太阳鸟", "U9佛山小兕虎", "U9上海鳄鱼", "U9上海烽火狼", "U9上海飓风角斗士", "U9上海银河", "U9上海鹰绿", "U9上海鹰坦克联队", "U9上海AFA鲨鱼", "U9苏州蓝骑士"], "U11": ["U11北京黑曼巴", "U11佛山小兕虎", "U11广州白鳍豚", "U11广州骑士", "U11南京雄狮", "U11青岛虎鲸", "U11上海鳄鱼", "U11上海烽火狼", "U11上海飓风角斗士", "U11上海银河", "U11上海鹰绿", "U11上海鹰坦克联队", "U11上海AFA鲨鱼", "U11苏州蓝骑士", "U11武汉猎豹"], "U13": ["U13北京黑曼巴", "U13北京维肯", "U13佛山小兕虎", "U13广州白鳍豚", "U13广州骑士", "U13杭州猛虎", "U13南京征服者", "U13青岛虎鲸", "U13上海烽火狼", "U13上海飓风角斗士", "U13上海银河", "U13上海鹰白", "U13上海鹰蓝", "U13上海鹰绿", "U13上海AFA鲨鱼", "U13深圳鲲鹏", "U13深圳热浪", "U13武汉猎豹", "U13武汉猎豹(黑豹)", "U13武汉猎豹(橙豹)"], "U15": ["U15北京黑曼巴", "U15北京维肯", "U15佛山小兕虎", "U15广州骑士", "U15杭州猛虎", "U15上海烽火狼", "U15上海裂袭者", "U15上海银河", "U15上海鹰"]}, "joined_teams": ["上海裂袭者", "上海鹰坦克联队"], "schedule": {"U15": {"S1": [["上海烽火狼", "北京黑曼巴"], ["杭州猛虎", "广州骑士"], ["上海银河", "上海裂袭者"], ["北京黑曼巴", "杭州猛虎"], ["广州骑士", "佛山小兕虎"], ["上海鹰", "上海烽火狼"]], "S2": [], "S3": [["佛山小兕虎", "北京黑曼巴"], ["北京维肯", "杭州猛虎"], ["北京黑曼巴", "杭州猛虎"], ["杭州猛虎", "佛山小兕虎"], ["上海鹰", "上海烽火狼"]], "S4": [["上海裂袭者", "上海银河"], ["上海飓风角斗士", "上海鹰"], ["上海鹰", "上海飓风角斗士"], ["上海鹰", "上海烽火狼"]], "S5": [], "S6": [["上海鹰", "北京维肯"], ["佛山小兕虎", "广州骑士"], ["北京维肯", "佛山小兕虎"], ["广州骑士", "上海鹰"]], "S7": [["上海裂袭者", "佛山小兕虎"], ["北京黑曼巴", "杭州猛虎"], ["佛山小兕虎", "北京黑曼巴"], ["广州骑士", "上海烽火狼"]], "S8": [["上海裂袭者", "上海鹰"], ["上海银河", "杭州猛虎"], ["上海鹰", "上海银河"], ["杭州猛虎", "上海裂袭者"]], "S9": [], "S10": [["上海鹰", "佛山小兕虎"], ["上海鹰", "北京维肯"], ["上海裂袭者", "杭州猛虎"], ["佛山小兕虎", "上海裂袭者"], ["北京维肯", "上海烽火狼"], ["杭州猛虎", "上海鹰"]], "S11": [["上海鹰", "北京黑曼巴"], ["广州骑士", "北京黑曼巴"], ["北京黑曼巴", "广州骑士"], ["北京黑曼巴", "上海银河"]], "S12": [], "S13": []}, "U13": {"S1": [["上海银河", "北京黑曼巴"], ["广州骑士", "杭州猛虎"], ["上海飓风角斗士", "杭州猛虎"], ["上海飓风角斗士", "北京黑曼巴"], ["北京黑曼巴", "广州骑士"]], "S2": [["上海AFA鲨鱼", "上海烽火狼"], ["上海飓风角斗士", "上海鹰白"], ["上海AFA鲨鱼", "上海鹰白"], ["上海鹰白", "广州白鳍豚"], ["武汉猎豹", "深圳鲲鹏"]], "S3": [["佛山小兕虎", "北京维肯"], ["杭州猛虎", "武汉猎豹"], ["武汉猎豹", "深圳热浪"], ["上海飓风角斗士", "北京黑曼巴"], ["北京维肯", "杭州猛虎"], ["武汉猎豹", "深圳鲲鹏"]], "S4": [["上海AFA鲨鱼", "上海飓风角斗士"], ["上海飓风角斗士", "上海鹰白"]], "S5": [["上海飓风角斗士", "上海鹰蓝"], ["北京黑曼巴", "武汉猎豹"], ["武汉猎豹", "青岛虎鲸"], ["上海飓风角斗士", "武汉猎豹"], ["杭州猛虎", "广州骑士"]], "S6": [["上海鹰白", "深圳鲲鹏"], ["上海鹰白", "深圳鲲鹏"], ["佛山小兕虎", "广州白鳍豚"], ["杭州猛虎", "广州骑士"], ["北京黑曼巴", "杭州猛虎"]], "S7": [["上海飓风角斗士", "北京黑曼巴"], ["佛山小兕虎", "广州骑士"], ["上海鹰蓝", "杭州猛虎"], ["佛山小兕虎", "北京黑曼巴"]], "S8": [["上海AFA鲨鱼", "上海飓风角斗士"], ["上海鹰白", "青岛虎鲸"], ["南京征服者", "武汉猎豹"], ["广州白鳍豚", "深圳热浪"], ["上海鹰蓝", "深圳鲲鹏"]], "S9": [["上海飓风角斗士", "武汉猎豹"], ["南京征服者", "武汉猎豹"], ["广州白鳍豚", "深圳热浪"], ["上海鹰蓝", "深圳鲲鹏"]], "S10": [["北京黑曼巴", "上海鹰绿"], ["杭州猛虎", "上海鹰"], ["上海飓风角斗士", "上海鹰白"], ["上海飓风角斗士", "杭州猛虎"], ["上海飓风角斗士", "武汉猎豹"], ["上海鹰绿", "北京黑曼巴"]], "S11": [["上海银河", "武汉猎豹"], ["上海鹰", "武汉猎豹"], ["北京黑曼巴", "青岛虎鲸"], ["上海鹰白", "深圳热浪"]], "S12": [], "S13": [["佛山小兕虎", "南京征服者"], ["广州白鳍豚", "广州骑士"], ["深圳热浪", "深圳鲲鹏"], ["佛山小兕虎", "深圳热浪"], ["南京征服者", "广州白鳍豚"]]}, "U11": {"S1": [["上海烽火狼", "广州骑士"], ["佛山小兕虎", "广州骑士"], ["上海银河", "北京黑曼巴"], ["佛山小兕虎", "广州骑士"]], "S2": [["上海AFA鲨鱼", "广州白鳍豚"], ["上海飓风角斗士", "上海鹰绿"]], "S3": [["上海飓风角斗士", "北京黑曼巴"], ["青岛虎鲸", "武汉猎豹"], ["上海飓风角斗士", "苏州蓝骑士"], ["北京黑曼巴", "武汉猎豹"]], "S4": [["上海AFA鲨鱼", "南京雄狮"], ["南京雄狮", "苏州蓝骑士"]], "S5": [["上海飓风角斗士", "上海鹰绿"], ["北京黑曼巴", "武汉猎豹"], ["北京黑曼巴", "杭州猛虎"], ["上海鹰绿", "广州骑士"], ["广州骑士", "深圳热浪"], ["上海AFA鲨鱼", "青岛虎鲸"]], "S6": [["佛山小兕虎", "北京黑曼巴"], ["上海AFA鲨鱼", "武汉猎豹"], ["广州白鳍豚", "武汉猎豹"]], "S7": [["上海飓风角斗士", "苏州蓝骑士"], ["上海飓风角斗士", "北京黑曼巴"]], "S8": [["北京黑曼巴", "武汉猎豹"], ["上海飓风角斗士", "上海鹰白"]], "S9": [["上海飓风角斗士", "北京黑曼巴"], ["北京黑曼巴", "武汉猎豹"], ["南京征服者", "广州白鳍豚"]], "S10": [["北京黑曼巴", "武汉猎豹"], ["上海飓风角斗士", "上海鹰白"], ["上海飓风角斗士", "杭州猛虎"]], "S11": [["上海AFA鲨鱼", "上海鹰绿"], ["上海鹰白", "苏州蓝骑士"], ["北京黑曼巴", "上海鹰绿"]], "S12": [], "S13": []}, "U9": {"S1": [["上海银河", "上海飓风角斗士"], ["上海鹰绿", "佛山小兕虎"], ["上海银河", "佛山小兕虎"], ["上海鹰绿", "上海飓风角斗士"], ["上海鹰绿", "上海飓风角斗士"]], "S2": [["上海AFA鲨鱼", "上海飓风角斗士"], ["上海飓风角斗士", "苏州蓝骑士"], ["上海飓风角斗士", "成都太阳鸟"], ["上海AFA鲨鱼", "成都太阳鸟"]], "S3": [["上海鹰绿", "上海飓风角斗士"], ["上海飓风角斗士", "苏州蓝骑士"]], "S4": [["上海鹰坦克联队", "上海飓风角斗士"], ["上海鹰绿", "上海飓风角斗士"], ["上海鹰绿", "上海飓风角斗士"]], "S5": [], "S6": [], "S7": [["上海鹰绿", "上海飓风角斗士"]], "S8": [], "S9": [], "S10": [["上海AFA鲨鱼", "佛山小兕虎"], ["上海AFA鲨鱼", "上海银河"], ["上海AFA鲨鱼", "苏州蓝骑士"]], "S11": [["上海飓风角斗士", "苏州蓝骑士"], ["上海飓风角斗士", "上海鹰绿"], ["上海鹰绿", "上海飓风角斗士"], ["上海飓风角斗士", "上海鹰绿"], ["上海飓风角斗士", "上海鹰绿"]], "S12": [], "S13": []}}};
+
+// 球队 → 城市 id 映射
+const TEAM_TO_CITY = {
+  '广州骑士':'guangzhou','广州白鳍豚':'guangzhou','广州黑骑士':'guangzhou',
+  '佛山小兕虎':'foshan','深圳鲲鹏':'shenzhen','深圳热浪':'shenzhen','珠海海东青':'zhuhai',
+  '上海烽火狼':'shanghai','上海鹰':'shanghai','上海鹰白':'shanghai','上海鹰蓝':'shanghai','上海鹰绿':'shanghai',
+  '上海鹰坦克联队':'shanghai','上海裂袭者':'shanghai','上海蓝魔':'shanghai','上海飓风角斗士':'shanghai',
+  '上海AFA鲨鱼':'shanghai','上海鳄鱼':'shanghai','上海银河':'shanghai','上海坚毅坦克':'shanghai',
+  '上海幽灵虎':'shanghai','上海Chang飓风':'shanghai','上海银河':'shanghai',
+  '南京征服者':'nanjing','南京雄狮':'nanjing',
+  '苏州蓝骑士':'suzhou',
+  '杭州将军':'hangzhou','杭州猛虎':'hangzhou','杭州四叶草':'hangzhou',
+  '温州赤鹿青训':'wenzhou',
+  '西安传奇':'xian',
+  '成都川渝幼狮联队':'chengdu','成都太阳鸟':'chengdu','成都红潮':'chengdu','成都飞虎':'chengdu',
+  '武汉change巴萨卡':'wuhan','武汉change眼镜蛇':'wuhan','武汉赤焰':'wuhan','武汉猎豹':'wuhan',
+  '武汉猎豹(黑豹)':'wuhan','武汉猎豹(橙豹)':'wuhan',
+  '北京维肯':'beijing','北京黑曼巴':'beijing','北京雄狮':'beijing',
+  '青岛虎鲸':'qingdao','济南眼镜蛇':'jinan','东营火凤凰':'dongying'
+};
+
+// 城市 id → 城市坐标（用于 flyTo）
+const CITY_COORDS = {
+  guangzhou:[23.1291,113.2644],shenzhen:[22.5429,114.0596],foshan:[23.0215,113.1214],zhuhai:[22.2707,113.5767],
+  shanghai:[31.2304,121.4737],suzhou:[31.2989,120.5853],nanjing:[32.0603,118.7969],hangzhou:[30.2741,120.1551],
+  wenzhou:[27.9939,120.6993],xian:[34.3416,108.9398],chengdu:[30.5728,104.0668],wuhan:[30.5928,114.3055],
+  beijing:[39.9042,116.4074],qingdao:[36.0671,120.3826],jinan:[36.6512,117.1201],dongying:[37.4346,118.6747]
+};
+
+let scheduleCurrentAge = 'U15';
+let scheduleCurrentTab = 'schedule'; // 'schedule' or 'standings'
+
+function openTeamOnMap(teamName) {
+  const cid = TEAM_TO_CITY[teamName];
+  if (!cid) {
+    console.log('未找到城市:', teamName);
+    return;
+  }
+  closeSchedule();
+  const coords = CITY_COORDS[cid];
+  if (coords && window._map) {
+    window._map.flyTo(coords, 11, { duration: 1.2 });
+  }
+  // 找到球队标记并触发点击
+  setTimeout(() => {
+    // 通过搜索框筛选该球队/城市
+    const search = document.getElementById('searchInput');
+    if (search) {
+      search.value = teamName;
+      search.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }, 300);
+}
+
+function openSchedule() {
+  document.getElementById('schedule').classList.add('open');
+  scheduleCurrentTab = 'schedule';
+  renderSchedulePage();
+}
+
+function closeSchedule() {
+  document.getElementById('schedule').classList.remove('open');
+}
+
+function switchScheduleTab(tab) {
+  scheduleCurrentTab = tab;
+  document.querySelectorAll('.sch-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  renderSchedulePage();
+}
+
+function switchScheduleAge(age) {
+  scheduleCurrentAge = age;
+  document.querySelectorAll('.sch-age').forEach(b => b.classList.toggle('active', b.dataset.age === age));
+  renderSchedulePage();
+}
+
+function renderSchedulePage() {
+  const body = document.getElementById('scheduleBody');
+  if (!body) return;
+  if (scheduleCurrentTab === 'schedule') {
+    body.innerHTML = renderSchedule();
+  } else {
+    body.innerHTML = renderStandings();
+  }
+  // 绑定球队点击
+  body.querySelectorAll('[data-team]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      openTeamOnMap(el.dataset.team);
+    });
+  });
+}
+
+function renderSchedule() {
+  const data = SCHEDULE_DATA;
+  const age = scheduleCurrentAge;
+  const stations = data.stations;
+  const matches = data.schedule[age] || {};
+  const totalMatches = Object.values(matches).reduce((s, v) => s + v.length, 0);
+  const teamCount = (data.teams[age] || []).length;
+  let html = '<div class="sch-meta">CYFL 2026-2027 · '+age+' · '+stations.length+' 站 · '+teamCount+' 队 · '+totalMatches+' 场</div>';
+  html += '<div class="sch-stations"><div class="sch-stn sch-corner"></div>';
+  for (const st of stations) {
+    html += '<div class="sch-stn" title="'+st.date+'">'+st.id+'<br><span class="sch-stn-city">'+st.city+'</span></div>';
+  }
+  html += '</div>';
+  // 单行（当前 age）
+  html += '<div class="sch-row"><div class="sch-rlabel">'+age+'</div>';
+  for (const st of stations) {
+    const arr = matches[st.id] || [];
+    html += '<div class="sch-cell">';
+    if (arr.length === 0) {
+      html += '<span class="sch-empty">—</span>';
+    } else {
+      for (const m of arr) {
+        html += '<div class="sch-mtch">'
+          + '<span class="sch-team" data-team="'+m[0]+'">'+m[0]+'</span>'
+          + '<span class="sch-vs">vs</span>'
+          + '<span class="sch-team" data-team="'+m[1]+'">'+m[1]+'</span>'
+          + '</div>';
+      }
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  // 联队说明
+  html += '<div class="sch-legend"><span class="sch-joined">●</span> 联队（点击不跳转）：上海裂袭者（上海猛犸鳄鱼+上海AFA鲨鱼）、上海鹰坦克联队（上海鹰+上海坚毅坦克）</div>';
+  html += '<div class="sch-note">⚠ U15/U13 较准，U11/U9 待校对。点球队名跳转地图对应城市。</div>';
+  return html;
+}
+
+function renderStandings() {
+  const data = SCHEDULE_DATA;
+  const age = scheduleCurrentAge;
+  const teams = data.teams[age] || [];
+  // 暂无赛果，按参赛队列表展示，初始 0 场 0 分
+  const rows = teams.map((t, i) => ({ team: t, played: 0, won: 0, drawn: 0, lost: 0, pf: 0, pa: 0, net: 0, pts: 0 }));
+  let html = '<div class="sch-meta">CYFL 2026-2027 · '+age+' 积分榜 · 0 已完赛（待录入赛果）</div>';
+  html += '<table class="sch-tbl"><thead><tr><th class="rk">#</th><th>球队</th><th>场</th><th>胜</th><th>平</th><th>负</th><th>得分</th><th>失分</th><th>净胜</th><th>积分</th></tr></thead><tbody>';
+  rows.forEach((r, i) => {
+    const nm = r.team.replace(/^U\d+/, '');
+    html += '<tr><td class="rk">'+(i+1)+'</td><td class="sch-tm" data-team="'+r.team+'"><span class="sch-tm-dot">'+(nm[0]||'队')+'</span>'+r.team+'</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="sch-net">0</td><td class="sch-pts">0</td></tr>';
+  });
+  html += '</tbody></table>';
+  html += '<div class="sch-note">胜 2 分 · 平 1 分 · 负 0 分 · 净胜 = 得分−失分 · 同分按净胜决胜</div>';
+  html += '<div class="sch-note">⚠ 赛果待录入，当前仅显示参赛队名单。点球队名跳转地图。</div>';
+  return html;
+}
+
+// 绑定
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('scheduleBtn');
+  if (btn) btn.addEventListener('click', openSchedule);
+  const close = document.getElementById('scheduleClose');
+  if (close) close.addEventListener('click', closeSchedule);
+  document.querySelectorAll('.sch-tab').forEach(b => b.addEventListener('click', () => switchScheduleTab(b.dataset.tab)));
+  document.querySelectorAll('.sch-age').forEach(b => b.addEventListener('click', () => switchScheduleAge(b.dataset.age)));
+  // ESC
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSchedule(); });
+  // 点击遮罩
+  const ov = document.getElementById('schedule');
+  if (ov) ov.addEventListener('click', e => { if (e.target === ov) closeSchedule(); });
+});
