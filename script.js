@@ -1062,8 +1062,8 @@ function bindSchedEvents(body){
   });
 }
 function scoreCell(){ return '<span class="sch-score">— : —</span>'; }
-function tmSpan(t){ const j=JOINED.has(t); return '<span class="sch-tm'+(j?' joined':'')+'" data-team="'+t+'">'+t+'</span>'; }
-function matchRow(a,b){ return '<div class="sch-match">'+tmSpan(a)+scoreCell()+tmSpan(b)+'</div>'; }
+function tmSpan(t,side){ const j=JOINED.has(t); const sc=side?(' tm-'+side):''; return '<span class="sch-tm'+(j?' joined':'')+sc+'" data-team="'+t+'">'+t+'</span>'; }
+function matchRow(a,b){ return '<div class="sch-match">'+tmSpan(a,'l')+scoreCell()+tmSpan(b,'r')+'</div>'; }
 function schedAllHTML(){
   const M=SCHEDULE_DATA.schedule[schedAge]||{}, st=SCHEDULE_DATA.stations;
   const teamCnt=(SCHEDULE_DATA.teams[schedAge]||[]).length;
@@ -1088,7 +1088,7 @@ function schedTeamHTML(name){
   h+='</div><div class="sch-meta-line">'+name+' 在 '+schedAge+' 组共 <b>'+list.length+'</b> 场比赛，点比分框位置可录入比分</div><div class="sch-team-list">';
   if(!list.length) h+='<div class="sch-empty-line">该队暂无已记录赛程</div>';
   list.forEach(it=>{
-    h+='<div class="sch-team-game"><div class="sch-game-stn"><span class="sch-gbadge">'+it.s.id+'</span><div><div>'+it.s.city+'</div><div class="sch-gdate">'+it.s.date+'</div></div></div><div class="sch-game-body">'+tmSpan(it.home?name:it.o)+scoreCell()+tmSpan(it.home?it.o:name)+'</div></div>';
+    h+='<div class="sch-team-game"><div class="sch-game-stn"><span class="sch-gbadge">'+it.s.id+'</span><div><div>'+it.s.city+'</div><div class="sch-gdate">'+it.s.date+'</div></div></div><div class="sch-game-body">'+tmSpan(it.home?name:it.o,'l')+scoreCell()+tmSpan(it.home?it.o:name,'r')+'</div></div>';
   });
   h+='</div><div class="sch-note-line">比分栏为预留位置，赛果录入后自动汇总到积分榜。</div></div>';
   return h;
@@ -1100,7 +1100,7 @@ function schedStandingsHTML(){
     const nm=t.replace(/^U\d+/,'');
     const rk=i===0?'sch-rk sch-rk1':i===1?'sch-rk sch-rk2':i===2?'sch-rk sch-rk3':'sch-rk';
     const isJ=JOINED.has(nm);
-    h+='<tr><td class="'+rk+'">'+(isJ?'—':(i+1))+'</td><td class="sch-team-cell"><span class="sch-logo-dot">'+(nm[0]||'队')+'</span>'+tmSpan(nm)+'</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-pts">0</td></tr>';
+    h+='<tr><td class="'+rk+'">'+(i+1)+'</td><td class="sch-team-cell"><span class="sch-logo-dot">'+(nm[0]||'队')+'</span>'+tmSpan(nm)+'</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-pts">0</td></tr>';
   });
   h+='</tbody></table></div><div class="sch-note-line">积分规则：胜 2 分 · 平 1 分 · 负 0 分，赛果录入后自动排序。点球队名查看该队全部赛程。</div></div>';
   return h;

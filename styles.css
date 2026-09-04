@@ -1512,8 +1512,10 @@ html, body {
 }
 
 /* ===== 赛程 v3：比分槽 + 球队赛程视图 ===== */
-.sch-match { display: flex; align-items: center; gap: 4px; }
+.sch-match { display: flex; align-items: center; gap: 3px; }
 .sch-tm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.sch-tm.tm-left { text-align: right; }   /* 左队右对齐，贴近比分 */
+.sch-tm.tm-right { text-align: left; }   /* 右队左对齐，贴近比分 */
 .sch-score {
   flex-shrink: 0;
   min-width: 46px;
@@ -1573,4 +1575,4 @@ html, body {
 }
 .sch-game-stn div div:first-child { font-size: 13px; font-weight: 600; color: #e6eaf2; }
 .sch-gdate { font-size: 10px; color: #f0c75e; }
-.sch-game-body { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0; }
+.sch-game-body { flex: 1; display: flex; align-items: center; gap: 3px; min-width: 0; }
