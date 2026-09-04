@@ -1,3 +1,7 @@
 .workbuddy/
 .DS_Store
 CNAME
+/schedule_shot*.png
+/screenshot_schedule.py
+/verify_schedule.py
+/shot_verify.py
