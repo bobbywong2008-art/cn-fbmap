@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赛程表排版优化预览</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #070b18;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      padding: 40px 20px;
+      color: #e6eaf2;
+    }
+    h2 {
+      color: #f7d977;
+      font-size: 18px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    .preview-note {
+      color: #8b96ab;
+      font-size: 13px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .preview-note b { color: #f0c75e; font-weight: 700; }
+
+    /* ---- 赛程卡片（复刻正式站样式） ---- */
+    .sch-card {
+      background: linear-gradient(160deg, rgba(17, 26, 48, 0.9), rgba(11, 17, 33, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+      max-width: 360px;
+      margin-bottom: 24px;
+    }
+    .sch-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .sch-stn-badge {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f7d977, #b8941f);
+      color: #171204;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800; font-size: 13px;
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+      flex-shrink: 0;
+    }
+    .sch-card-city { font-size: 15px; font-weight: 700; color: #f0f2f5; }
+    .sch-card-date { font-size: 11px; color: #f0c75e; margin-top: 1px; }
+    .sch-card-count { margin-left: auto; font-size: 11px; color: #8b96ab; background: rgba(255,255,255,.06); padding: 3px 9px; border-radius: 12px; }
+    .sch-matches { display: flex; flex-direction: column; gap: 6px; }
+
+    /* ---- 方案 A：Flex + 文本对齐（当前已部署） ---- */
+    .sch-match-a {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 6px 8px;
+      font-size: 12.5px;
+    }
+    .sch-match-a .sch-tm {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .sch-match-a .tm-left { text-align: right; }
+    .sch-match-a .tm-right { text-align: left; }
+
+    /* ---- 方案 B：Grid + 文本对齐（更稳，避免 flex 残余空间不均） ---- */
+    .sch-match-b {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 3px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 6px 8px;
+      font-size: 12.5px;
+    }
+    .sch-match-b .sch-tm {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .sch-match-b .tm-left { text-align: right; }
+    .sch-match-b .tm-right { text-align: left; }
+
+    .sch-score {
+      flex-shrink: 0;
+      min-width: 52px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: #6b7890;
+      font-variant-numeric: tabular-nums;
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(212,175,55,0.35);
+      border-radius: 6px;
+      padding: 3px 4px;
+    }
+    .sch-tm:hover { color: #f7d977; background: rgba(212, 175, 55, 0.15); }
+
+    .label {
+      color: #8b96ab;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .label span { color: #f7d977; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h2>赛程表排版优化预览</h2>
+  <p class="preview-note">
+    你截图里的问题是：左队在卡片最左、右队在卡片最右，比分像被「孤立」在中间。<br>
+    下面给出两个方案，核心都是<b>左队右对齐、右队左对齐、两队名都紧贴比分</b>。两个方案视觉几乎一致，B 方案用 Grid 更稳。请确认用 A 还是 B，我更新到正式站点。
+  </p>
+
+  <div class="label">方案 A：Flex + 文本对齐（<span>推荐</span>）</div>
+  <div class="sch-card">
+    <div class="sch-card-head">
+      <div class="sch-stn-badge">S1</div>
+      <div>
+        <div class="sch-card-city">杭州</div>
+        <div class="sch-card-date">2026.10.3-10.4</div>
+      </div>
+      <span class="sch-card-count">6 场</span>
+    </div>
+    <div class="sch-matches">
+      <div class="sch-match-a"><span class="sch-tm tm-left">上海烽火狼</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">北京黑曼巴</span></div>
+      <div class="sch-match-a"><span class="sch-tm tm-left">杭州猛虎</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">广州骑士</span></div>
+      <div class="sch-match-a"><span class="sch-tm tm-left">上海银河</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">上海裂袭者</span></div>
+      <div class="sch-match-a"><span class="sch-tm tm-left">北京黑曼巴</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">杭州猛虎</span></div>
+      <div class="sch-match-a"><span class="sch-tm tm-left">广州骑士</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">上海银河</span></div>
+      <div class="sch-match-a"><span class="sch-tm tm-left">上海裂袭者</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">上海烽火狼</span></div>
+    </div>
+  </div>
+
+  <div class="label">方案 B：Grid + 文本对齐</div>
+  <div class="sch-card">
+    <div class="sch-card-head">
+      <div class="sch-stn-badge">S1</div>
+      <div>
+        <div class="sch-card-city">杭州</div>
+        <div class="sch-card-date">2026.10.3-10.4</div>
+      </div>
+      <span class="sch-card-count">6 场</span>
+    </div>
+    <div class="sch-matches">
+      <div class="sch-match-b"><span class="sch-tm tm-left">上海烽火狼</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">北京黑曼巴</span></div>
+      <div class="sch-match-b"><span class="sch-tm tm-left">杭州猛虎</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">广州骑士</span></div>
+      <div class="sch-match-b"><span class="sch-tm tm-left">上海银河</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">上海裂袭者</span></div>
+      <div class="sch-match-b"><span class="sch-tm tm-left">北京黑曼巴</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">杭州猛虎</span></div>
+      <div class="sch-match-b"><span class="sch-tm tm-left">广州骑士</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">上海银河</span></div>
+      <div class="sch-match-b"><span class="sch-tm tm-left">上海裂袭者</span><span class="sch-score">— : —</span><span class="sch-tm tm-right">上海烽火狼</span></div>
+    </div>
+  </div>
+</body>
+</html>
