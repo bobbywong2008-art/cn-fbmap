@@ -988,7 +988,11 @@ document.addEventListener('DOMContentLoaded', initGuestbook);
 console.log('中国青少年美式装备橄榄球地图图鉴');
 console.log(`  ${totalCities} 个城市 · ${totalTeams} 支球队`);
 console.log('  数据来源：各地俱乐部公开信息');
-const SCHEDULE_DATA = {"_note":"150 场手工读","stations":[{"id":"S1","city":"杭州","date":"2026.10.3-4"},{"id":"S2","city":"上海","date":"10.24-25"},{"id":"S3","city":"青岛","date":"10.31-11.1"},{"id":"S4","city":"上海","date":"11.21-22"},{"id":"S5","city":"武汉","date":"12.5-6"},{"id":"S6","city":"广州","date":"12.19-20"},{"id":"S7","city":"佛山","date":"2027.3.6-7"},{"id":"S8","city":"上海","date":"3.13-14"},{"id":"S9","city":"南京","date":"3.20-21"},{"id":"S10","city":"苏州","date":"4.3-4"},{"id":"S11","city":"北京","date":"4.24-25"},{"id":"S12","city":"上海","date":"5.1-2"},{"id":"S13","city":"深圳","date":"5.3-4"}],"teams":{"U9":["U9成都太阳鸟","U9佛山小兕虎","U9上海鳄鱼","U9上海烽火狼","U9上海飓风角斗士","U9上海银河","U9上海鹰绿","U9上海鹰坦克联队","U9上海AFA鲨鱼","U9苏州蓝骑士"],"U11":["U11北京黑曼巴","U11佛山小兕虎","U11广州白鳍豚","U11广州骑士","U11南京雄狮","U11青岛虎鲸","U11上海鳄鱼","U11上海烽火狼","U11上海飓风角斗士","U11上海银河","U11上海鹰绿","U11上海鹰坦克联队","U11上海AFA鲨鱼","U11苏州蓝骑士","U11武汉猎豹"],"U13":["U13北京黑曼巴","U13北京维肯","U13佛山小兕虎","U13广州白鳍豚","U13广州骑士","U13杭州猛虎","U13南京征服者","U13青岛虎鲸","U13上海烽火狼","U13上海飓风角斗士","U13上海银河","U13上海鹰白","U13上海鹰蓝","U13上海鹰绿","U13上海AFA鲨鱼","U13深圳鲲鹏","U13深圳热浪","U13武汉猎豹","U13武汉猎豹(黑豹)","U13武汉猎豹(橙豹)"],"U15":["U15北京黑曼巴","U15北京维肯","U15佛山小兕虎","U15广州骑士","U15杭州猛虎","U15上海烽火狼","U15上海裂袭者","U15上海银河","U15上海鹰"]},"joined_teams":["上海裂袭者","上海鹰坦克联队"],"schedule":{"U15":{"S1":[["上海烽火狼","北京黑曼巴"],["杭州猛虎","广州骑士"],["上海银河","上海裂袭者"],["北京黑曼巴","杭州猛虎"],["广州骑士","佛山小兕虎"],["上海鹰","上海烽火狼"]],"S2":[],"S3":[["佛山小兕虎","北京黑曼巴"],["北京维肯","杭州猛虎"],["北京黑曼巴","杭州猛虎"],["杭州猛虎","佛山小兕虎"],["上海鹰","上海烽火狼"]],"S4":[["上海裂袭者","上海银河"],["上海飓风角斗士","上海鹰"],["上海鹰","上海飓风角斗士"],["上海鹰","上海烽火狼"]],"S5":[],"S6":[["上海鹰","北京维肯"],["佛山小兕虎","广州骑士"],["北京维肯","佛山小兕虎"],["广州骑士","上海鹰"]],"S7":[["上海裂袭者","佛山小兕虎"],["北京黑曼巴","杭州猛虎"],["佛山小兕虎","北京黑曼巴"],["广州骑士","上海烽火狼"]],"S8":[["上海裂袭者","上海鹰"],["上海银河","杭州猛虎"],["上海鹰","上海银河"],["杭州猛虎","上海裂袭者"]],"S9":[],"S10":[["上海鹰","佛山小兕虎"],["上海鹰","北京维肯"],["上海裂袭者","杭州猛虎"],["佛山小兕虎","上海裂袭者"],["北京维肯","上海烽火狼"],["杭州猛虎","上海鹰"]],"S11":[["上海鹰","北京黑曼巴"],["广州骑士","北京黑曼巴"],["北京黑曼巴","广州骑士"],["北京黑曼巴","上海银河"]],"S12":[],"S13":[]},"U13":{"S1":[["上海银河","北京黑曼巴"],["广州骑士","杭州猛虎"],["上海飓风角斗士","杭州猛虎"],["上海飓风角斗士","北京黑曼巴"],["北京黑曼巴","广州骑士"]],"S2":[["上海AFA鲨鱼","上海烽火狼"],["上海飓风角斗士","上海鹰白"],["上海AFA鲨鱼","上海鹰白"],["上海鹰白","广州白鳍豚"],["武汉猎豹","深圳鲲鹏"]],"S3":[["佛山小兕虎","北京维肯"],["杭州猛虎","武汉猎豹"],["武汉猎豹","深圳热浪"],["上海飓风角斗士","北京黑曼巴"],["北京维肯","杭州猛虎"],["武汉猎豹","深圳鲲鹏"]],"S4":[["上海AFA鲨鱼","上海飓风角斗士"],["上海飓风角斗士","上海鹰白"]],"S5":[["上海飓风角斗士","上海鹰蓝"],["北京黑曼巴","武汉猎豹"],["武汉猎豹","青岛虎鲸"],["上海飓风角斗士","武汉猎豹"],["杭州猛虎","广州骑士"]],"S6":[["上海鹰白","深圳鲲鹏"],["佛山小兕虎","广州白鳍豚"],["杭州猛虎","广州骑士"],["北京黑曼巴","杭州猛虎"]],"S7":[["上海飓风角斗士","北京黑曼巴"],["佛山小兕虎","广州骑士"],["上海鹰蓝","杭州猛虎"],["佛山小兕虎","北京黑曼巴"]],"S8":[["上海AFA鲨鱼","上海飓风角斗士"],["上海鹰白","青岛虎鲸"],["南京征服者","武汉猎豹"],["广州白鳍豚","深圳热浪"],["上海鹰蓝","深圳鲲鹏"]],"S9":[["上海飓风角斗士","武汉猎豹"],["南京征服者","武汉猎豹"],["广州白鳍豚","深圳热浪"],["上海鹰蓝","深圳鲲鹏"]],"S10":[["北京黑曼巴","上海鹰绿"],["杭州猛虎","上海鹰"],["上海飓风角斗士","上海鹰白"],["上海飓风角斗士","武汉猎豹"],["上海鹰绿","北京黑曼巴"]],"S11":[["上海银河","武汉猎豹"],["上海鹰","武汉猎豹"],["北京黑曼巴","青岛虎鲸"],["上海鹰白","深圳热浪"]],"S12":[],"S13":[["佛山小兕虎","南京征服者"],["广州白鳍豚","广州骑士"],["深圳热浪","深圳鲲鹏"],["佛山小兕虎","深圳热浪"],["南京征服者","广州白鳍豚"]]},"U11":{"S1":[["上海烽火狼","广州骑士"],["佛山小兕虎","广州骑士"],["上海银河","北京黑曼巴"]],"S2":[["上海AFA鲨鱼","广州白鳍豚"],["上海飓风角斗士","上海鹰绿"]],"S3":[["上海飓风角斗士","北京黑曼巴"],["青岛虎鲸","武汉猎豹"],["上海飓风角斗士","苏州蓝骑士"],["北京黑曼巴","武汉猎豹"]],"S4":[["上海AFA鲨鱼","南京雄狮"],["南京雄狮","苏州蓝骑士"]],"S5":[["上海飓风角斗士","上海鹰绿"],["北京黑曼巴","武汉猎豹"],["北京黑曼巴","杭州猛虎"],["上海鹰绿","广州骑士"],["广州骑士","深圳热浪"],["上海AFA鲨鱼","青岛虎鲸"]],"S6":[["佛山小兕虎","北京黑曼巴"],["上海AFA鲨鱼","武汉猎豹"],["广州白鳍豚","武汉猎豹"]],"S7":[["上海飓风角斗士","苏州蓝骑士"],["上海飓风角斗士","北京黑曼巴"]],"S8":[["北京黑曼巴","武汉猎豹"],["上海飓风角斗士","上海鹰白"]],"S9":[["上海飓风角斗士","北京黑曼巴"],["北京黑曼巴","武汉猎豹"],["南京征服者","广州白鳍豚"]],"S10":[["北京黑曼巴","武汉猎豹"],["上海飓风角斗士","上海鹰白"]],"S11":[["上海AFA鲨鱼","上海鹰绿"],["上海鹰白","苏州蓝骑士"],["北京黑曼巴","上海鹰绿"]],"S12":[],"S13":[]},"U9":{"S1":[["上海银河","上海飓风角斗士"],["上海鹰绿","佛山小兕虎"],["上海银河","佛山小兕虎"],["上海鹰绿","上海飓风角斗士"]],"S2":[["上海AFA鲨鱼","上海飓风角斗士"],["上海飓风角斗士","苏州蓝骑士"],["上海飓风角斗士","成都太阳鸟"],["上海AFA鲨鱼","成都太阳鸟"]],"S3":[["上海鹰绿","上海飓风角斗士"],["上海飓风角斗士","苏州蓝骑士"]],"S4":[["上海鹰坦克联队","上海飓风角斗士"],["上海鹰绿","上海飓风角斗士"]],"S5":[],"S6":[],"S7":[["上海鹰绿","上海飓风角斗士"]],"S8":[],"S9":[],"S10":[["上海AFA鲨鱼","佛山小兕虎"],["上海AFA鲨鱼","上海银河"],["上海AFA鲨鱼","苏州蓝骑士"]],"S11":[["上海飓风角斗士","苏州蓝骑士"],["上海飓风角斗士","上海鹰绿"],["上海鹰绿","上海飓风角斗士"],["上海飓风角斗士","上海鹰绿"]],"S12":[],"S13":[]}}};
+// ========================
+// CYFL 2026-2027 赛程 + 积分榜 (v3 全屏)
+// ========================
+const SCHEDULE_DATA = {"_note": "148 场手工读，U15/U13 较准，U11/U9 待校对", "stations": [{"id": "S1", "city": "杭州", "date": "2026.10.3-10.4"}, {"id": "S2", "city": "上海", "date": "10.24-10.25"}, {"id": "S3", "city": "青岛", "date": "10.31-11.01"}, {"id": "S4", "city": "上海", "date": "11.21-11.22"}, {"id": "S5", "city": "武汉", "date": "12.05-12.06"}, {"id": "S6", "city": "广州", "date": "12.19-12.20"}, {"id": "S7", "city": "佛山", "date": "2027.3.6-3.7"}, {"id": "S8", "city": "上海", "date": "3.13-3.14"}, {"id": "S9", "city": "南京", "date": "3.20-3.21"}, {"id": "S10", "city": "苏州", "date": "4.03-4.04"}, {"id": "S11", "city": "北京", "date": "4.24-4.25"}, {"id": "S12", "city": "上海", "date": "5.01-5.02"}, {"id": "S13", "city": "深圳", "date": "5.03-5.04"}], "teams": {"U9": ["U9成都太阳鸟", "U9佛山小兕虎", "U9上海鳄鱼", "U9上海烽火狼", "U9上海飓风角斗士", "U9上海银河", "U9上海鹰绿", "U9上海鹰坦克联队", "U9上海AFA鲨鱼", "U9苏州蓝骑士"], "U11": ["U11北京黑曼巴", "U11佛山小兕虎", "U11广州白鳍豚", "U11广州骑士", "U11南京雄狮", "U11青岛虎鲸", "U11上海鳄鱼", "U11上海烽火狼", "U11上海飓风角斗士", "U11上海银河", "U11上海鹰绿", "U11上海鹰坦克联队", "U11上海AFA鲨鱼", "U11苏州蓝骑士", "U11武汉猎豹"], "U13": ["U13北京黑曼巴", "U13北京维肯", "U13佛山小兕虎", "U13广州白鳍豚", "U13广州骑士", "U13杭州猛虎", "U13南京征服者", "U13青岛虎鲸", "U13上海烽火狼", "U13上海飓风角斗士", "U13上海银河", "U13上海鹰白", "U13上海鹰蓝", "U13上海鹰绿", "U13上海AFA鲨鱼", "U13深圳鲲鹏", "U13深圳热浪", "U13武汉猎豹(黑豹)", "U13武汉猎豹(橙豹)"], "U15": ["U15北京黑曼巴", "U15北京维肯", "U15佛山小兕虎", "U15广州骑士", "U15杭州猛虎", "U15上海烽火狼", "U15上海裂袭者", "U15上海银河", "U15上海鹰"]}, "joined_teams": ["上海裂袭者", "上海鹰坦克联队"], "schedule": {"U15": {"S1": [["上海烽火狼", "北京黑曼巴"], ["杭州猛虎", "广州骑士"], ["上海银河", "上海裂袭者"], ["北京黑曼巴", "杭州猛虎"], ["广州骑士", "佛山小兕虎"], ["上海鹰", "上海烽火狼"]], "S2": [], "S3": [["佛山小兕虎", "北京黑曼巴"], ["北京维肯", "杭州猛虎"], ["北京黑曼巴", "杭州猛虎"], ["杭州猛虎", "佛山小兕虎"], ["上海鹰", "上海烽火狼"]], "S4": [["上海裂袭者", "上海银河"], ["上海飓风角斗士", "上海鹰"], ["上海鹰", "上海飓风角斗士"], ["上海鹰", "上海烽火狼"]], "S5": [], "S6": [["上海鹰", "北京维肯"], ["佛山小兕虎", "广州骑士"], ["北京维肯", "佛山小兕虎"], ["广州骑士", "上海鹰"]], "S7": [["上海裂袭者", "佛山小兕虎"], ["北京黑曼巴", "杭州猛虎"], ["佛山小兕虎", "北京黑曼巴"], ["广州骑士", "上海烽火狼"]], "S8": [["上海裂袭者", "上海鹰"], ["上海银河", "杭州猛虎"], ["上海鹰", "上海银河"], ["杭州猛虎", "上海裂袭者"]], "S9": [], "S10": [["上海鹰", "佛山小兕虎"], ["上海鹰", "北京维肯"], ["上海裂袭者", "杭州猛虎"], ["佛山小兕虎", "上海裂袭者"], ["北京维肯", "上海烽火狼"], ["杭州猛虎", "上海鹰"]], "S11": [["上海鹰", "北京黑曼巴"], ["广州骑士", "北京黑曼巴"], ["北京黑曼巴", "广州骑士"], ["北京黑曼巴", "上海银河"]], "S12": [], "S13": []}, "U13": {"S1": [["上海银河", "北京黑曼巴"], ["广州骑士", "杭州猛虎"], ["上海飓风角斗士", "杭州猛虎"], ["上海飓风角斗士", "北京黑曼巴"], ["北京黑曼巴", "广州骑士"]], "S2": [["上海AFA鲨鱼", "上海烽火狼"], ["上海飓风角斗士", "上海鹰白"], ["上海AFA鲨鱼", "上海鹰白"], ["上海鹰白", "广州白鳍豚"], ["武汉猎豹(黑豹)", "深圳鲲鹏"]], "S3": [["佛山小兕虎", "北京维肯"], ["杭州猛虎", "武汉猎豹(黑豹)"], ["武汉猎豹(黑豹)", "深圳热浪"], ["上海飓风角斗士", "北京黑曼巴"], ["北京维肯", "杭州猛虎"], ["武汉猎豹(黑豹)", "深圳鲲鹏"]], "S4": [["上海AFA鲨鱼", "上海飓风角斗士"], ["上海飓风角斗士", "上海鹰白"]], "S5": [["上海飓风角斗士", "上海鹰蓝"], ["北京黑曼巴", "武汉猎豹(黑豹)"], ["武汉猎豹(黑豹)", "青岛虎鲸"], ["上海飓风角斗士", "武汉猎豹(黑豹)"], ["杭州猛虎", "广州骑士"]], "S6": [["上海鹰白", "深圳鲲鹏"], ["上海鹰白", "深圳鲲鹏"], ["佛山小兕虎", "广州白鳍豚"], ["杭州猛虎", "广州骑士"], ["北京黑曼巴", "杭州猛虎"]], "S7": [["上海飓风角斗士", "北京黑曼巴"], ["佛山小兕虎", "广州骑士"], ["上海鹰蓝", "杭州猛虎"], ["佛山小兕虎", "北京黑曼巴"]], "S8": [["上海AFA鲨鱼", "上海飓风角斗士"], ["上海鹰白", "青岛虎鲸"], ["南京征服者", "武汉猎豹(黑豹)"], ["广州白鳍豚", "深圳热浪"], ["上海鹰蓝", "深圳鲲鹏"]], "S9": [["上海飓风角斗士", "武汉猎豹(黑豹)"], ["南京征服者", "武汉猎豹(黑豹)"], ["广州白鳍豚", "深圳热浪"], ["上海鹰蓝", "深圳鲲鹏"]], "S10": [["北京黑曼巴", "上海鹰绿"], ["杭州猛虎", "上海鹰"], ["上海飓风角斗士", "上海鹰白"], ["上海飓风角斗士", "杭州猛虎"], ["上海飓风角斗士", "武汉猎豹(黑豹)"], ["上海鹰绿", "北京黑曼巴"]], "S11": [["上海银河", "武汉猎豹(黑豹)"], ["上海鹰", "武汉猎豹(黑豹)"], ["北京黑曼巴", "青岛虎鲸"], ["上海鹰白", "深圳热浪"]], "S12": [], "S13": [["佛山小兕虎", "南京征服者"], ["广州白鳍豚", "广州骑士"], ["深圳热浪", "深圳鲲鹏"], ["佛山小兕虎", "深圳热浪"], ["南京征服者", "广州白鳍豚"]]}, "U11": {"S1": [["上海烽火狼", "广州骑士"], ["佛山小兕虎", "广州骑士"], ["上海银河", "北京黑曼巴"], ["佛山小兕虎", "广州骑士"]], "S2": [["上海AFA鲨鱼", "广州白鳍豚"], ["上海飓风角斗士", "上海鹰绿"]], "S3": [["上海飓风角斗士", "北京黑曼巴"], ["青岛虎鲸", "武汉猎豹"], ["上海飓风角斗士", "苏州蓝骑士"], ["北京黑曼巴", "武汉猎豹"]], "S4": [["上海AFA鲨鱼", "南京雄狮"], ["南京雄狮", "苏州蓝骑士"]], "S5": [["上海飓风角斗士", "上海鹰绿"], ["北京黑曼巴", "武汉猎豹"], ["北京黑曼巴", "杭州猛虎"], ["上海鹰绿", "广州骑士"], ["广州骑士", "深圳热浪"], ["上海AFA鲨鱼", "青岛虎鲸"]], "S6": [["佛山小兕虎", "北京黑曼巴"], ["上海AFA鲨鱼", "武汉猎豹"], ["广州白鳍豚", "武汉猎豹"]], "S7": [["上海飓风角斗士", "苏州蓝骑士"], ["上海飓风角斗士", "北京黑曼巴"]], "S8": [["北京黑曼巴", "武汉猎豹"], ["上海飓风角斗士", "上海鹰白"]], "S9": [["上海飓风角斗士", "北京黑曼巴"], ["北京黑曼巴", "武汉猎豹"], ["南京征服者", "广州白鳍豚"]], "S10": [["北京黑曼巴", "武汉猎豹"], ["上海飓风角斗士", "上海鹰白"], ["上海飓风角斗士", "杭州猛虎"]], "S11": [["上海AFA鲨鱼", "上海鹰绿"], ["上海鹰白", "苏州蓝骑士"], ["北京黑曼巴", "上海鹰绿"]], "S12": [], "S13": []}, "U9": {"S1": [["上海银河", "上海飓风角斗士"], ["上海鹰绿", "佛山小兕虎"], ["上海银河", "佛山小兕虎"], ["上海鹰绿", "上海飓风角斗士"], ["上海鹰绿", "上海飓风角斗士"]], "S2": [["上海AFA鲨鱼", "上海飓风角斗士"], ["上海飓风角斗士", "苏州蓝骑士"], ["上海飓风角斗士", "成都太阳鸟"], ["上海AFA鲨鱼", "成都太阳鸟"]], "S3": [["上海鹰绿", "上海飓风角斗士"], ["上海飓风角斗士", "苏州蓝骑士"]], "S4": [["上海鹰坦克联队", "上海飓风角斗士"], ["上海鹰绿", "上海飓风角斗士"], ["上海鹰绿", "上海飓风角斗士"]], "S5": [], "S6": [], "S7": [["上海鹰绿", "上海飓风角斗士"]], "S8": [], "S9": [], "S10": [["上海AFA鲨鱼", "佛山小兕虎"], ["上海AFA鲨鱼", "上海银河"], ["上海AFA鲨鱼", "苏州蓝骑士"]], "S11": [["上海飓风角斗士", "苏州蓝骑士"], ["上海飓风角斗士", "上海鹰绿"], ["上海鹰绿", "上海飓风角斗士"], ["上海飓风角斗士", "上海鹰绿"], ["上海飓风角斗士", "上海鹰绿"]], "S12": [], "S13": []}}};
+
 
 const TEAM_TO_CITY = {
   '广州骑士':'guangzhou','广州白鳍豚':'guangzhou','广州黑骑士':'guangzhou',
@@ -1015,143 +1019,98 @@ const CITY_COORDS = {
 
 let schedAge = 'U15';
 let schedTab = 'schedule';
+let schedTeam = null;
 const JOINED = new Set(SCHEDULE_DATA.joined_teams);
-const TEAM_LOGO_MAP = teamLogos || {};
-// 分队 → 主队（跳转用）: 鹰白/蓝/绿 → 上海鹰；猎豹(黑/橙) → 武汉猎豹；鹰坦克联队/裂袭者 → 无（联队）
-const TEAM_CANON = {
+const TEAM_CITY_RAW = {
   '上海鹰白':'上海鹰','上海鹰蓝':'上海鹰','上海鹰绿':'上海鹰',
   '武汉猎豹(黑豹)':'武汉猎豹','武汉猎豹(橙豹)':'武汉猎豹'
 };
-const TEAM_SHORT = {
-  '上海飓风角斗士':'上海飓风','上海AFA鲨鱼':'AFA鲨鱼','上海鹰坦克联队':'鹰坦克联队',
-  '武汉change巴萨卡':'巴萨卡','武汉change眼镜蛇':'眼镜蛇'
-};
-
-function shortName(t) {
-  if (TEAM_SHORT[t]) return TEAM_SHORT[t];
-  return t.replace(/^上海/,'').replace(/^成都/,'').replace(/^武汉/,'').replace(/^广州/,'').replace(/^深圳/,'').replace(/^北京/,'').replace(/^佛山/,'');
+function cityOfTeam(n){ const c=TEAM_CITY_RAW[n]||n; return TEAM_TO_CITY[c]||null; }
+function cityLabel(n){
+  for(const k of ['上海','广州','深圳','佛山','珠海','南京','苏州','杭州','温州','西安','成都','武汉','北京','青岛','济南','东营']){
+    if(n.indexOf(k)===0) return k; }
+  return '';
 }
-
-function jumpToTeam(raw) {
-  let t = TEAM_CANON[raw] || raw;
-  if (JOINED.has(raw) || !TEAM_TO_CITY[t]) {
-    // 联队或无映射：尝试触发城市内筛选（上海联队 → 上海）
-    t = raw;
-    const c = TEAM_TO_CITY[t];
-    if (!c) { console.log('联队/无映射:', raw); return; }
-  }
-  const cid = TEAM_TO_CITY[t];
+function jumpToMap(n){
+  const cid=cityOfTeam(n);
+  if(!cid) return;
   closeScheduleView();
-  const coords = CITY_COORDS[cid];
-  if (coords && window._map) window._map.flyTo(coords, 11, { duration: 1.1 });
-  setTimeout(() => {
-    const s = document.getElementById('searchInput');
-    if (s) { s.value = raw; s.dispatchEvent(new Event('input', { bubbles: true })); }
-  }, 350);
+  const c=CITY_COORDS[cid];
+  if(c&&window._map) window._map.flyTo(c,12,{duration:1.1});
 }
-
-function openScheduleView() {
-  const v = document.getElementById('scheduleView');
-  if (v) v.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  renderSched();
+function openScheduleView(){ const v=document.getElementById('scheduleView'); if(v)v.classList.add('open'); document.body.style.overflow='hidden'; schedTeam=null; renderSched(); }
+function closeScheduleView(){ const v=document.getElementById('scheduleView'); if(v)v.classList.remove('open'); document.body.style.overflow=''; }
+function setSchedTab(t){ schedTab=t; schedTeam=null; document.querySelectorAll('.sch-viewtab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t)); renderSched(); }
+function setSchedAge(a){ schedAge=a; schedTeam=null; document.querySelectorAll('.sch-age').forEach(b=>b.classList.toggle('active',b.dataset.age===a)); renderSched(); }
+function clearSchedTeam(){ schedTeam=null; renderSched(); }
+function renderSched(){
+  const body=document.getElementById('schBody'); if(!body) return;
+  body.innerHTML = schedTab==='standings' ? schedStandingsHTML() : (schedTeam ? schedTeamHTML(schedTeam) : schedAllHTML());
+  bindSchedEvents(body);
 }
-function closeScheduleView() {
-  const v = document.getElementById('scheduleView');
-  if (v) v.classList.remove('open');
-  document.body.style.overflow = '';
-}
-function setSchedTab(tab) {
-  schedTab = tab;
-  document.querySelectorAll('.sch-viewtab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  renderSched();
-}
-function setSchedAge(age) {
-  schedAge = age;
-  document.querySelectorAll('.sch-age').forEach(b => b.classList.toggle('active', b.dataset.age === age));
-  renderSched();
-}
-
-function renderSched() {
-  const body = document.getElementById('schBody');
-  if (!body) return;
-  const data = SCHEDULE_DATA;
-  const stns = data.stations;
-  if (schedTab === 'standings') { body.innerHTML = schedStandingsHTML(); }
-  else { body.innerHTML = schedScheduleHTML(); }
-  // 绑定点击（事件委托）
-  body.querySelectorAll('.sch-tm').forEach(el => {
-    el.addEventListener('click', e => { e.stopPropagation(); jumpToTeam(el.dataset.team); });
+function bindSchedEvents(body){
+  body.querySelectorAll('.sch-tm[data-team]').forEach(el=>{
+    el.addEventListener('click',e=>{
+      e.stopPropagation();
+      const t=el.dataset.team;
+      if(JOINED.has(t)){ jumpToMap(t); return; }
+      schedTeam=t; schedTab='schedule';
+      document.querySelectorAll('.sch-viewtab').forEach(b=>b.classList.toggle('active',b.dataset.tab==='schedule'));
+      renderSched();
+    });
+  });
+  body.querySelectorAll('.sch-goto[data-team]').forEach(el=>{
+    el.addEventListener('click',e=>{ e.stopPropagation(); jumpToMap(el.dataset.team); });
   });
 }
-
-function schedScheduleHTML() {
-  const data = SCHEDULE_DATA;
-  const age = schedAge;
-  const matches = data.schedule[age] || {};
-  const stns = data.stations;
-  const teamCnt = (data.teams[age] || []).length;
-  let all = 0; stns.forEach(s => all += (matches[s.id]||[]).length);
-  const played = stns.filter(s => (matches[s.id]||[]).length > 0).length;
-  let h = '<div class="sch-inner">';
-  h += '<div class="sch-meta-line">' + age + ' 装备组 · <b>' + stns.length + '</b> 站 · <b>' + teamCnt + '</b> 队 · <b>' + played + '</b> 站有赛事 · 共 <b>' + all + '</b> 场 · 点击球队名可跳转地图</div>';
-  h += '<div class="sch-grid">';
-  for (const st of stns) {
-    const arr = matches[st.id] || [];
-    h += '<div class="sch-card">';
-    h += '<div class="sch-card-head"><div class="sch-stn-badge">' + st.id + '</div><div><div class="sch-card-city">' + st.city + '</div><div class="sch-card-date">' + st.date + '</div></div><span class="sch-card-count">' + (arr.length ? arr.length + ' 场' : '休赛') + '</span></div>';
-    h += '<div class="sch-matches">';
-    if (arr.length === 0) {
-      h += '<div class="sch-empty-line">该年龄组本站无赛事</div>';
-    } else {
-      for (const m of arr) {
-        h += schedMatchHTML(m[0], m[1]);
-      }
-    }
-    h += '</div></div>';
+function scoreCell(){ return '<span class="sch-score">— : —</span>'; }
+function tmSpan(t){ const j=JOINED.has(t); return '<span class="sch-tm'+(j?' joined':'')+'" data-team="'+t+'">'+t+'</span>'; }
+function matchRow(a,b){ return '<div class="sch-match">'+tmSpan(a)+scoreCell()+tmSpan(b)+'</div>'; }
+function schedAllHTML(){
+  const M=SCHEDULE_DATA.schedule[schedAge]||{}, st=SCHEDULE_DATA.stations;
+  const teamCnt=(SCHEDULE_DATA.teams[schedAge]||[]).length;
+  let all=0; st.forEach(s=>all+=(M[s.id]||[]).length);
+  let h='<div class="sch-inner"><div class="sch-meta-line">'+schedAge+' 装备组 · '+st.length+' 站 · <b>'+teamCnt+'</b> 队 · 共 <b>'+all+'</b> 场 · 点球队名查看该队全部赛程，比分栏待赛果录入</div><div class="sch-grid">';
+  for(const s of st){
+    const arr=M[s.id]||[];
+    h+='<div class="sch-card"><div class="sch-card-head"><div class="sch-stn-badge">'+s.id+'</div><div><div class="sch-card-city">'+s.city+'</div><div class="sch-card-date">'+s.date+'</div></div><span class="sch-card-count">'+(arr.length?arr.length+' 场':'休赛')+'</span></div><div class="sch-matches">';
+    if(!arr.length){ h+='<div class="sch-empty-line">该年龄组本站无赛事</div>'; }
+    else{ arr.forEach(m=>{ h+=matchRow(m[0],m[1]); }); }
+    h+='</div></div>';
   }
-  h += '</div>';
-  h += '<div class="sch-joined-note"><b>联队说明：</b>上海裂袭者 = 上海猛犸鳄鱼 × 上海AFA鲨鱼；上海鹰坦克联队 = 上海鹰 × 上海坚毅坦克 —— 联队点击不跳转。上海鹰白/蓝/绿 与 武汉猎豹(黑/橙) 为分队，点击跳原俱乐部。</div>';
-  h += '<div class="sch-note-line">注：对阵数据为第一版整理（U15 / U13 准确度较高，U11 / U9 待复核）。发现错误可直接告诉我"某站某队对手不对"。</div>';
-  h += '</div>';
+  h+='</div><div class="sch-joined-note"><b>联队：</b>上海裂袭者 = 上海猛犸鳄鱼 × 上海AFA鲨鱼；上海鹰坦克联队 = 上海鹰 × 上海坚毅坦克，联队点击定位城市。<br><b>分队：</b>上海鹰白/蓝/绿、武汉猎豹(黑豹/橙豹) 为独立参赛队。</div></div>';
   return h;
 }
-
-function schedMatchHTML(a, b) {
-  const clsA = JOINED.has(a) ? 'sch-tm joined' : 'sch-tm';
-  const clsB = JOINED.has(b) ? 'sch-tm joined' : 'sch-tm';
-  const iconA = '<span class="sch-tm-ic">' + (a[0]||'队') + '</span>';
-  const iconB = '<span class="sch-tm-ic">' + (b[0]||'队') + '</span>';
-  return '<div class="sch-match">' + iconA + '<span class="' + clsA + '" data-team="' + a + '">' + shortName(a) + '</span><span class="sch-vs">VS</span>' + iconB + '<span class="' + clsB + '" data-team="' + b + '">' + shortName(b) + '</span></div>';
-}
-
-function schedStandingsHTML() {
-  const data = SCHEDULE_DATA;
-  const age = schedAge;
-  const teams = data.teams[age] || [];
-  let h = '<div class="sch-inner">';
-  h += '<div class="sch-meta-line">' + age + ' 装备组积分榜 · <b>' + teams.length + '</b> 队 · 赛果录入后自动计算排名（胜 2 分 / 平 1 分 / 负 0 分）</div>';
-  h += '<div class="sch-table-wrap"><table class="sch-table"><thead><tr><th>排名</th><th>球队</th><th>场次</th><th>胜</th><th>平</th><th>负</th><th>得分</th><th>失分</th><th>净胜分</th><th>积分</th></tr></thead><tbody>';
-  teams.forEach((t, i) => {
-    const nm = t.replace(/^U\d+/, '');
-    const cls = i === 0 ? 'sch-rk sch-rk1' : i === 1 ? 'sch-rk sch-rk2' : i === 2 ? 'sch-rk sch-rk3' : 'sch-rk';
-    const icon = '<span class="sch-logo-dot">' + (nm[0]||'队') + '</span>';
-    const isJoined = JOINED.has(nm);
-    h += '<tr><td class="' + cls + '">' + (isJoined ? '—' : (i + 1)) + '</td><td class="sch-team-cell">' + icon + '<span class="sch-tm' + (isJoined ? ' joined' : '') + '" data-team="' + nm + '">' + nm + '</span></td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-pts">0</td></tr>';
+function schedTeamHTML(name){
+  const M=SCHEDULE_DATA.schedule[schedAge]||{}, st=SCHEDULE_DATA.stations;
+  const list=[];
+  st.forEach(s=>{ (M[s.id]||[]).forEach(m=>{ if(m[0]===name)list.push({s:s,o:m[1],home:true}); else if(m[1]===name)list.push({s:s,o:m[0],home:false}); }); });
+  let h='<div class="sch-inner"><div class="sch-teambar"><button class="sch-back2" onclick="clearSchedTeam()">← 全部赛程</button><span class="sch-teambar-n"><span class="sch-logo-dot">'+name[0]+'</span><b>'+name+'</b><span class="sch-teambar-age">'+schedAge+'</span></span>';
+  if(cityOfTeam(name)) h+='<button class="sch-goto" data-team="'+name+'">📍 查看 '+cityLabel(name)+' 球队</button>';
+  h+='</div><div class="sch-meta-line">'+name+' 在 '+schedAge+' 组共 <b>'+list.length+'</b> 场比赛，点比分框位置可录入比分</div><div class="sch-team-list">';
+  if(!list.length) h+='<div class="sch-empty-line">该队暂无已记录赛程</div>';
+  list.forEach(it=>{
+    h+='<div class="sch-team-game"><div class="sch-game-stn"><span class="sch-gbadge">'+it.s.id+'</span><div><div>'+it.s.city+'</div><div class="sch-gdate">'+it.s.date+'</div></div></div><div class="sch-game-body">'+tmSpan(it.home?name:it.o)+scoreCell()+tmSpan(it.home?it.o:name)+'</div></div>';
   });
-  h += '</tbody></table></div>';
-  h += '<div class="sch-note-line">积分规则：<span class="kw">胜 2 分</span> · <span class="kw">平 1 分</span> · <span class="kw">负 0 分</span>，同分按净胜分排序。榜单待赛果录入后自动更新。</div>';
-  h += '</div>';
+  h+='</div><div class="sch-note-line">比分栏为预留位置，赛果录入后自动汇总到积分榜。</div></div>';
   return h;
 }
-
-// 绑定
+function schedStandingsHTML(){
+  const teams=SCHEDULE_DATA.teams[schedAge]||[];
+  let h='<div class="sch-inner"><div class="sch-meta-line">'+schedAge+' 装备组积分榜 · '+teams.length+' 队 · 点球队查看全部赛程（胜 2 / 平 1 / 负 0）</div><div class="sch-table-wrap"><table class="sch-table"><thead><tr><th>#</th><th>球队</th><th>场次</th><th>胜</th><th>平</th><th>负</th><th>得分</th><th>失分</th><th>净胜分</th><th>积分</th></tr></thead><tbody>';
+  teams.forEach((t,i)=>{
+    const nm=t.replace(/^U\d+/,'');
+    const rk=i===0?'sch-rk sch-rk1':i===1?'sch-rk sch-rk2':i===2?'sch-rk sch-rk3':'sch-rk';
+    const isJ=JOINED.has(nm);
+    h+='<tr><td class="'+rk+'">'+(isJ?'—':(i+1))+'</td><td class="sch-team-cell"><span class="sch-logo-dot">'+(nm[0]||'队')+'</span>'+tmSpan(nm)+'</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-num">0</td><td class="sch-pts">0</td></tr>';
+  });
+  h+='</tbody></table></div><div class="sch-note-line">积分规则：胜 2 分 · 平 1 分 · 负 0 分，赛果录入后自动排序。点球队名查看该队全部赛程。</div></div>';
+  return h;
+}
 document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.getElementById('cyflBanner');
-  if (banner) banner.addEventListener('click', openScheduleView);
-  const back = document.getElementById('schBack');
-  if (back) back.addEventListener('click', closeScheduleView);
-  document.querySelectorAll('.sch-viewtab').forEach(b => b.addEventListener('click', () => setSchedTab(b.dataset.tab)));
-  document.querySelectorAll('.sch-age').forEach(b => b.addEventListener('click', () => setSchedAge(b.dataset.age)));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeScheduleView(); });
+  const b=document.getElementById('cyflBanner'); if(b)b.addEventListener('click',openScheduleView);
+  const bk=document.getElementById('schBack'); if(bk)bk.addEventListener('click',closeScheduleView);
+  document.querySelectorAll('.sch-viewtab').forEach(x=>x.addEventListener('click',()=>setSchedTab(x.dataset.tab)));
+  document.querySelectorAll('.sch-age').forEach(x=>x.addEventListener('click',()=>setSchedAge(x.dataset.age)));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeScheduleView(); });
 });
