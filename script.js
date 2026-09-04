@@ -1063,7 +1063,7 @@ function bindSchedEvents(body){
 }
 function scoreCell(){ return '<span class="sch-score">— : —</span>'; }
 function tmSpan(t,side){ const j=JOINED.has(t); const sc=side?(' tm-'+side):''; return '<span class="sch-tm'+(j?' joined':'')+sc+'" data-team="'+t+'">'+t+'</span>'; }
-function matchRow(a,b){ return '<div class="sch-match">'+tmSpan(a,'l')+scoreCell()+tmSpan(b,'r')+'</div>'; }
+function matchRow(a,b){ return '<div class="sch-match">'+tmSpan(a,'left')+scoreCell()+tmSpan(b,'right')+'</div>'; }
 function schedAllHTML(){
   const M=SCHEDULE_DATA.schedule[schedAge]||{}, st=SCHEDULE_DATA.stations;
   const teamCnt=(SCHEDULE_DATA.teams[schedAge]||[]).length;
@@ -1088,7 +1088,7 @@ function schedTeamHTML(name){
   h+='</div><div class="sch-meta-line">'+name+' 在 '+schedAge+' 组共 <b>'+list.length+'</b> 场比赛，点比分框位置可录入比分</div><div class="sch-team-list">';
   if(!list.length) h+='<div class="sch-empty-line">该队暂无已记录赛程</div>';
   list.forEach(it=>{
-    h+='<div class="sch-team-game"><div class="sch-game-stn"><span class="sch-gbadge">'+it.s.id+'</span><div><div>'+it.s.city+'</div><div class="sch-gdate">'+it.s.date+'</div></div></div><div class="sch-game-body">'+tmSpan(it.home?name:it.o,'l')+scoreCell()+tmSpan(it.home?it.o:name,'r')+'</div></div>';
+    h+='<div class="sch-team-game"><div class="sch-game-stn"><span class="sch-gbadge">'+it.s.id+'</span><div><div>'+it.s.city+'</div><div class="sch-gdate">'+it.s.date+'</div></div></div><div class="sch-game-body">'+tmSpan(it.home?name:it.o,'left')+scoreCell()+tmSpan(it.home?it.o:name,'right')+'</div></div>';
   });
   h+='</div><div class="sch-note-line">比分栏为预留位置，赛果录入后自动汇总到积分榜。</div></div>';
   return h;
