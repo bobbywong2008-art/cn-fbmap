@@ -980,6 +980,11 @@ html, body {
   color: var(--text-muted) !important;
 }
 
+/* 压暗底图：只作用于 Base 瓦片所在的 tilePane，Reference 注记层（overlayPane）保持原亮可读 */
+.leaflet-tile-pane {
+  filter: brightness(0.55) saturate(0.7) contrast(1.08);
+}
+
 /* ========================
    RESPONSIVE
    ======================== */
