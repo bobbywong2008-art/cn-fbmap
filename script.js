@@ -436,7 +436,7 @@ function renderCity(city, visible) {
   const cityIcon = L.divIcon({
     className: 'city-center-marker',
     html: `
-      <div class="city-center" style="--cc:${city.color}">
+      <div class="city-center">
         <span class="city-center-ring"></span>
         <span class="city-center-ring r2"></span>
         <span class="city-center-dot"></span>
@@ -458,9 +458,9 @@ function renderCity(city, visible) {
     teamPositions.forEach(position => {
       const connector = L.polyline([city.center, position], {
         className: 'city-connector flow',
-        color: city.color,
-        weight: 1.5,
-        opacity: 0.4,
+        color: '#d4af37',
+        weight: 1.2,
+        opacity: 0.35,
         smoothFactor: 1,
         renderer: L.svg()
       }).addTo(map);
@@ -476,7 +476,7 @@ function renderCity(city, visible) {
     const icon = L.divIcon({
       className: 'team-marker',
       html: `
-        <div class="team-icon" style="border-color: ${city.color}">
+        <div class="team-icon">
           <img src="${logoUrl}" alt="${team.name} Logo" onerror="this.src='${placeholderSVG}'">
         </div>
       `,
@@ -811,7 +811,7 @@ function initCityFilters() {
   container.innerHTML = citiesData.map(city => `
     <label class="city-filter-item">
       <input type="checkbox" value="${city.id}" checked>
-      <span class="color-dot" style="background:${city.color}"></span>
+      <span class="color-dot"></span>
       ${city.name} (${city.teams.length})
     </label>
   `).join('');
