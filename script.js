@@ -351,6 +351,12 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_D
   attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA',
   maxZoom: 16
 }).addTo(map);
+// Reference 注记层：边界 + 城市/国家/水域文字，半透明叠加在底图上
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 16,
+  pane: 'overlayPane',
+  opacity: 1
+}).addTo(map);
 
 // ========================
 // RENDER STATE
