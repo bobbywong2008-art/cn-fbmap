@@ -346,10 +346,10 @@ window._map = map;
 // 初始视野：自动框住全部 16 个城市（fitBounds），避免四周大片空白
 const nationalBounds = L.latLngBounds(citiesData.map(c => c.center));
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution: '',
-  maxZoom: 18,
-  subdomains: 'abcd'
+// Esri Canvas World Dark Gray — 免 Key、免 token，纯灰底英文标注，无水印
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA',
+  maxZoom: 16
 }).addTo(map);
 
 // ========================
