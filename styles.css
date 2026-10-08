@@ -1506,6 +1506,33 @@ html, body {
 }
 .sch-pts { font-weight: 800; font-size: 14.5px; color: #f7d977; }
 .sch-num { color: #cdd5e2; }
+
+/* 积分榜队徽徽章 — 方案B：白底圆 + 金色双环 + 外发光（前三名金/银/铜） */
+.sch-badge {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #fff; overflow: hidden; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 1.5px rgba(212, 175, 55, 0.92),
+              0 0 0 4.5px rgba(212, 175, 55, 0.16),
+              0 0 16px rgba(212, 175, 55, 0.35),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+.sch-badge img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.sch-badge.ph { font-size: 13px; font-weight: 700; color: #b8941f; }
+.sch-badge.g1 {
+  box-shadow: 0 0 0 2px #f7d977, 0 0 0 5px rgba(247, 217, 119, 0.22),
+              0 0 20px rgba(247, 217, 119, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+.sch-badge.g2 {
+  box-shadow: 0 0 0 2px #cfd6e0, 0 0 0 5px rgba(207, 214, 224, 0.18),
+              0 0 16px rgba(207, 214, 224, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+.sch-badge.g3 {
+  box-shadow: 0 0 0 2px #d99a5b, 0 0 0 5px rgba(217, 154, 91, 0.18),
+              0 0 16px rgba(217, 154, 91, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+/* 球队赛程视图头部的徽章略小一号 */
+.sch-teambar-n .sch-badge { width: 30px; height: 30px; }
 .sch-note-line { font-size: 11.5px; color: #6b7890; margin-top: 14px; line-height: 1.7; }
 .sch-note-line .kw { color: #f0c75e; }
 .sch-joined-note {

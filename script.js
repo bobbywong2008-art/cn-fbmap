@@ -54,6 +54,27 @@ const teamLogos = {
   "东营火凤凰": "logos/dongying-huofenghuang.png"
 };
 
+// 积分榜队徽：别名映射（小程序/赛程里的队名 → teamLogos 里已有的队徽）
+const LOGO_ALIAS = {
+  "上海鹰白": "上海鹰", "上海鹰蓝": "上海鹰", "上海鹰绿": "上海鹰",
+  "上海鹰坦克联队": "上海鹰",
+  "武汉雪豹": "武汉猎豹", "武汉黑豹": "武汉猎豹"
+};
+// 返回积分榜用的徽章图路径（裁剪白边版，位于 logos/badge/）；无图返回 null
+function badgeUrl(name){
+  const base = LOGO_ALIAS[name] || name;
+  const p = teamLogos[base];
+  return p ? p.replace('logos/', 'logos/badge/') : null;
+}
+// 生成队徽徽章 HTML；idx 为名次索引（0/1/2 分别套金/银/铜环），传 -1 表示不套
+function badgeHtml(name, idx){
+  const cls = 'sch-badge' + (idx===0?' g1':idx===1?' g2':idx===2?' g3':'');
+  const u = badgeUrl(name);
+  return u
+    ? '<span class="'+cls+'"><img src="'+u+'" alt="" loading="lazy"></span>'
+    : '<span class="'+cls+' ph">'+(name[0]||'队')+'</span>';
+}
+
 // ========================
 // CITY DATA (matches reference exactly)
 // ========================
@@ -1089,7 +1110,7 @@ function schedTeamHTML(name){
   const M=SCHEDULE_DATA.schedule[schedAge]||{}, st=SCHEDULE_DATA.stations;
   const list=[];
   st.forEach(s=>{ (M[s.id]||[]).forEach(m=>{ if(m[0]===name)list.push({s:s,o:m[1],home:true}); else if(m[1]===name)list.push({s:s,o:m[0],home:false}); }); });
-  let h='<div class="sch-inner"><div class="sch-teambar"><button class="sch-back2" onclick="clearSchedTeam()">← 全部赛程</button><span class="sch-teambar-n"><span class="sch-logo-dot">'+name[0]+'</span><b>'+name+'</b><span class="sch-teambar-age">'+schedAge+'</span></span>';
+  let h='<div class="sch-inner"><div class="sch-teambar"><button class="sch-back2" onclick="clearSchedTeam()">← 全部赛程</button><span class="sch-teambar-n">'+badgeHtml(name,-1)+'<b>'+name+'</b><span class="sch-teambar-age">'+schedAge+'</span></span>';
   if(cityOfTeam(name)) h+='<button class="sch-goto" data-team="'+name+'">📍 查看 '+cityLabel(name)+' 球队</button>';
   h+='</div><div class="sch-meta-line">'+name+' 在 '+schedAge+' 组共 <b>'+list.length+'</b> 场比赛，点比分框位置可录入比分</div><div class="sch-team-list">';
   if(!list.length) h+='<div class="sch-empty-line">该队暂无已记录赛程</div>';
@@ -1112,7 +1133,7 @@ function schedStandingsHTML(){
       const rk=i===0?'sch-rk sch-rk1':i===1?'sch-rk sch-rk2':i===2?'sch-rk sch-rk3':'sch-rk';
       const played=r.w+r.d+r.l;
       const pdv=(r.pd>0?'+':'')+r.pd;
-      h+='<tr><td class="'+rk+'">'+(i+1)+'</td><td class="sch-team-cell"><span class="sch-logo-dot">'+(nm[0]||'队')+'</span>'+tmSpan(nm)+'</td><td class="sch-num">'+played+'</td><td class="sch-num">'+r.w+'</td><td class="sch-num">'+r.d+'</td><td class="sch-num">'+r.l+'</td><td class="sch-num">'+pdv+'</td><td class="sch-pts">'+r.pts+'</td></tr>';
+      h+='<tr><td class="'+rk+'">'+(i+1)+'</td><td class="sch-team-cell">'+badgeHtml(nm,i)+tmSpan(nm)+'</td><td class="sch-num">'+played+'</td><td class="sch-num">'+r.w+'</td><td class="sch-num">'+r.d+'</td><td class="sch-num">'+r.l+'</td><td class="sch-num">'+pdv+'</td><td class="sch-pts">'+r.pts+'</td></tr>';
     });
     h+='</tbody></table></div>';
   }
