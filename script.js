@@ -71,7 +71,7 @@ function badgeHtml(name, idx){
   const cls = 'sch-badge' + (idx===0?' g1':idx===1?' g2':idx===2?' g3':'');
   const u = badgeUrl(name);
   return u
-    ? '<span class="'+cls+'"><img src="'+u+'" alt="" loading="lazy"></span>'
+    ? '<span class="'+cls+'"><img src="'+u+'" alt=""></span>'
     : '<span class="'+cls+' ph">'+(name[0]||'队')+'</span>';
 }
 
