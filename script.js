@@ -399,6 +399,13 @@ let activeFilters = {
 // ========================
 // TEAM POSITIONING (Golden Ratio Spiral - matches reference)
 // ========================
+// 所有连接线共用一个 SVG 渲染器：此前每条线各建一个，32 条线就是几十个 SVG 层，缩放时明显卡顿
+let _connRenderer = null;
+function connRenderer(){
+  if(!_connRenderer) _connRenderer = L.svg({ padding: 0.5 });
+  return _connRenderer;
+}
+
 function calculateTeamPositions(center, teamCount) {
   if (teamCount === 1) return [center];
 
@@ -505,7 +512,7 @@ function renderCity(city, visible) {
         weight: 1.2,
         opacity: 0.35,
         smoothFactor: 1,
-        renderer: L.svg()
+        renderer: connRenderer()
       }).addTo(map);
       allConnectors[city.id].push(connector);
     });
@@ -667,12 +674,29 @@ function applyFilters() {
   updateLegend();
 }
 
-// 缩放结束后按新像素尺度重排标记：放大时自动散开，缩小时自动收拢
+// 缩放时只移动已有标记，不重建 DOM —— 重建 40 个 divIcon 会造成明显卡顿
+function reflowTeamPositions(){
+  citiesData.forEach(city=>{
+    const arr = allMarkers[city.id];
+    if(!arr || arr.length < 2) return;          // 只有城市中心点，没有球队
+    const teamMarkers = arr.slice(1);           // [0] 是城市中心点
+    const lines = allConnectors[city.id] || [];
+    const pos = calculateTeamPositions(city.center, teamMarkers.length);
+    teamMarkers.forEach((m,i)=>{
+      m.setLatLng(pos[i]);
+      if(lines[i]) lines[i].setLatLngs([city.center, pos[i]]);
+    });
+  });
+}
+
 let _reflowTimer = null;
+map.on('zoomstart', () => document.body.classList.add('is-zooming'));
 map.on('zoomend', () => {
+  document.body.classList.remove('is-zooming');
   clearTimeout(_reflowTimer);
   _reflowTimer = setTimeout(() => {
-    try { applyFilters(); } catch (e) { /* 忽略重排异常，保持当前渲染 */ }
+    try { reflowTeamPositions(); }
+    catch (e) { try { applyFilters(); } catch (_) {} }   // 兜底：失败则全量重建
   }, 180);
 });
 

@@ -823,6 +823,11 @@ html, body {
 @keyframes flowDash {
   to { stroke-dashoffset: -16; }
 }
+/* 缩放过程中暂停动画：避免 30+ 条线的描边动画与地图 transform 同时重绘造成卡顿 */
+body.is-zooming .city-connector.flow,
+body.is-zooming .city-center-ring {
+  animation-play-state: paused;
+}
 
 /* ========================
    POPUP 球星卡 (Card Popup)
