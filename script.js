@@ -796,6 +796,20 @@ panelHeader.addEventListener('click', () => {
   controlPanel.classList.toggle('collapsed');
 });
 
+// 数据总览也可折叠：点标题切换（移动端默认收起，只留统计数字）
+const legendEl = document.getElementById('legend');
+const legendTitleEl = legendEl ? legendEl.querySelector('.legend-title') : null;
+if (legendEl && legendTitleEl) {
+  legendTitleEl.style.cursor = 'pointer';
+  legendTitleEl.addEventListener('click', () => legendEl.classList.toggle('collapsed'));
+}
+
+// 移动端默认收起两块面板，把可视区域让给地图
+if (window.innerWidth <= 768) {
+  controlPanel.classList.add('collapsed');
+  if (legendEl) legendEl.classList.add('collapsed');
+}
+
 // ========================
 // FILTER CONTROLS
 // ========================

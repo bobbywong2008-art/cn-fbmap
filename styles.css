@@ -999,11 +999,17 @@ html, body {
     border-radius: 18px 18px 0 0;
   }
   #control-panel.collapsed { max-height: none; }
+  #control-panel.collapsed .panel-header { padding: 13px 18px; }
   .panel-content { max-height: calc(42vh - 60px); }
+
+  /* 顶部横幅压缩，避免与数据总览抢空间 */
+  #cyflBanner { top: 64px; padding: 7px 14px; gap: 7px; }
+  #cyflBanner .cb-t { font-size: 12px; }
+  #cyflBanner .cb-s { display: none; }
 
   #legend {
     bottom: auto;
-    top: 64px;
+    top: 110px;
     right: 10px;
     left: 10px;
     padding: 14px;
@@ -1011,6 +1017,21 @@ html, body {
     max-width: none;
     border-radius: 16px;
   }
+  /* 折叠态：只留标题 + 一行统计，隐藏城市明细，把屏幕让给地图 */
+  #legend.collapsed { padding: 9px 14px; }
+  #legend.collapsed .legend-cities { display: none; }
+  #legend.collapsed .legend-title { margin-bottom: 6px; }
+  #legend.collapsed .legend-stats {
+    margin-bottom: 0; padding-bottom: 0; border-bottom: none; gap: 16px;
+  }
+  #legend.collapsed .legend-stat {
+    display: flex; align-items: baseline; gap: 4px; text-align: left;
+  }
+  #legend.collapsed .legend-stat-num { font-size: 17px; }
+  #legend.collapsed .legend-stat-label { font-size: 10.5px; letter-spacing: 0; }
+  #legend .legend-title { display: flex; align-items: center; justify-content: space-between; }
+  #legend .legend-title::after { content: '▾'; font-size: 11px; opacity: .55; }
+  #legend.collapsed .legend-title::after { content: '▸'; }
 
   #title-bar {
     font-size: 12px;
