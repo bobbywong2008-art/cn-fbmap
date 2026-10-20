@@ -1533,6 +1533,19 @@ html, body {
 }
 /* 球队赛程视图头部的徽章略小一号 */
 .sch-teambar-n .sch-badge { width: 30px; height: 30px; }
+
+/* 积分榜窄屏：把「场次/胜/平/负/净胜分」合并成一列「战绩」，保证「积分」始终可见 */
+.sch-c-wdl { display: none; }
+@media (max-width: 700px) {
+  .sch-c-pl, .sch-c-w, .sch-c-d, .sch-c-l, .sch-c-pd { display: none; }
+  .sch-c-wdl { display: table-cell; }
+  .sch-table { font-size: 12px; }
+  .sch-table thead th, .sch-table tbody td { padding: 10px 7px; }
+  .sch-team-cell { gap: 7px; }
+  .sch-tm { max-width: 110px; }
+  .sch-badge { width: 30px; height: 30px; }
+  .sch-pts { font-size: 14px; }
+}
 .sch-note-line { font-size: 11.5px; color: #6b7890; margin-top: 14px; line-height: 1.7; }
 .sch-note-line .kw { color: #f0c75e; }
 .sch-joined-note {

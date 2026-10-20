@@ -402,16 +402,32 @@ let activeFilters = {
 function calculateTeamPositions(center, teamCount) {
   if (teamCount === 1) return [center];
 
-  const positions = [];
-  // 紧凑布局：半径较原版缩小约 40%，球队标记更贴城市中心
-  const baseRadius = (0.08 + teamCount * 0.006) * 0.6;
+  // 按「屏幕像素」排布：标记尺寸是固定的，用地理半径会在缩小地图时挤成一团。
+  // 这里先把城市中心投影到当前 zoom 的像素坐标，按固定像素间距排，再反投影回经纬度。
+  const z = map.getZoom();
+  const centerPt = map.project(L.latLng(center[0], center[1]), z);
+  const ICON_PX = 46;                          // 标记直径
+  const spacing = ICON_PX * 0.62;              // 相邻点间距
   const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+  const cosLat = Math.max(0.4, Math.cos(center[0] * Math.PI / 180));
+  // 地理半径上限，防止低 zoom 时散到邻近城市去
+  const MAX_DEG = 0.55;
 
+  const positions = [];
   for (let i = 0; i < teamCount; i++) {
-    const r = baseRadius * Math.sqrt(i + 1);
+    const rPx = spacing * Math.sqrt(i + 1);
     const angle = i * goldenAngle;
-    const lat = center[0] + Math.sin(angle) * r * 0.7;
-    const lng = center[1] + Math.cos(angle) * r;
+    const p = map.unproject(
+      L.point(centerPt.x + Math.cos(angle) * rPx, centerPt.y + Math.sin(angle) * rPx), z
+    );
+    let lat = p.lat, lng = p.lng;
+    const dLat = lat - center[0], dLng = lng - center[1];
+    const dist = Math.hypot(dLat, dLng * cosLat);
+    if (dist > MAX_DEG) {
+      const k = MAX_DEG / dist;
+      lat = center[0] + dLat * k;
+      lng = center[1] + dLng * k;
+    }
     positions.push([lat, lng]);
   }
 
@@ -498,7 +514,9 @@ function renderCity(city, visible) {
   // 绘制球队标记
   filteredTeams.forEach((team, index) => {
     const teamPosition = teamPositions[index];
-    const logoUrl = teamLogos[team.name] || 'logos/placeholder.png';
+    const logoFull = teamLogos[team.name] || 'logos/placeholder.png';
+    // 地图标记实际只显示 42px，改用 96px 小图；原图留给弹窗大图用
+    const logoUrl = logoFull.indexOf('logos/') === 0 ? logoFull.replace('logos/', 'logos/marker/') : logoFull;
 
     const icon = L.divIcon({
       className: 'team-marker',
@@ -528,7 +546,7 @@ function renderCity(city, visible) {
           <div class="cp-inner">
             <div class="cp-top">
               <div class="cp-badge">
-                <img src="${logoUrl}" alt="${team.name} Logo" onerror="this.src='${placeholderSVG}'">
+                <img src="${logoFull}" alt="${team.name} Logo" onerror="this.src='${placeholderSVG}'">
               </div>
               <div class="cp-headtxt">
                 <h3 class="cp-name">${team.name}</h3>
@@ -648,6 +666,15 @@ function applyFilters() {
 
   updateLegend();
 }
+
+// 缩放结束后按新像素尺度重排标记：放大时自动散开，缩小时自动收拢
+let _reflowTimer = null;
+map.on('zoomend', () => {
+  clearTimeout(_reflowTimer);
+  _reflowTimer = setTimeout(() => {
+    try { applyFilters(); } catch (e) { /* 忽略重排异常，保持当前渲染 */ }
+  }, 180);
+});
 
 // ========================
 // GET VISIBLE CITY IDS
@@ -1127,13 +1154,13 @@ function schedStandingsHTML(){
   if(!rows||!rows.length){
     h+='<div class="sch-empty-line">该组暂无积分数据</div>';
   }else{
-    h+='<div class="sch-table-wrap"><table class="sch-table"><thead><tr><th>#</th><th>球队</th><th>场次</th><th>胜</th><th>平</th><th>负</th><th>净胜分</th><th>积分</th></tr></thead><tbody>';
+    h+='<div class="sch-table-wrap"><table class="sch-table"><thead><tr><th>#</th><th>球队</th><th class="sch-c-pl">场次</th><th class="sch-c-w">胜</th><th class="sch-c-d">平</th><th class="sch-c-l">负</th><th class="sch-c-wdl">战绩</th><th class="sch-c-pd">净胜分</th><th>积分</th></tr></thead><tbody>';
     rows.forEach((r,i)=>{
       const nm=r.n.replace(/^U\d+/,'');
       const rk=i===0?'sch-rk sch-rk1':i===1?'sch-rk sch-rk2':i===2?'sch-rk sch-rk3':'sch-rk';
       const played=r.w+r.d+r.l;
       const pdv=(r.pd>0?'+':'')+r.pd;
-      h+='<tr><td class="'+rk+'">'+(i+1)+'</td><td class="sch-team-cell">'+badgeHtml(nm,i)+tmSpan(nm)+'</td><td class="sch-num">'+played+'</td><td class="sch-num">'+r.w+'</td><td class="sch-num">'+r.d+'</td><td class="sch-num">'+r.l+'</td><td class="sch-num">'+pdv+'</td><td class="sch-pts">'+r.pts+'</td></tr>';
+      h+='<tr><td class="'+rk+'">'+(i+1)+'</td><td class="sch-team-cell">'+badgeHtml(nm,i)+tmSpan(nm)+'</td><td class="sch-num sch-c-pl">'+played+'</td><td class="sch-num sch-c-w">'+r.w+'</td><td class="sch-num sch-c-d">'+r.d+'</td><td class="sch-num sch-c-l">'+r.l+'</td><td class="sch-num sch-c-wdl">'+r.w+'-'+r.d+'-'+r.l+'</td><td class="sch-num sch-c-pd">'+pdv+'</td><td class="sch-pts">'+r.pts+'</td></tr>';
     });
     h+='</tbody></table></div>';
   }
