@@ -690,14 +690,18 @@ function reflowTeamPositions(){
 }
 
 let _reflowTimer = null;
-map.on('zoomstart', () => document.body.classList.add('is-zooming'));
+map.on('zoomstart', () => {
+  document.body.classList.add('is-zooming');
+  document.body.classList.remove('reflowing');
+});
 map.on('zoomend', () => {
   document.body.classList.remove('is-zooming');
+  // 立即归位 + 短暂过渡：原来是延迟 180ms 再瞬间跳位，观感上就是"卡一下"
+  document.body.classList.add('reflowing');
+  try { reflowTeamPositions(); }
+  catch (e) { try { applyFilters(); } catch (_) {} }   // 兜底：失败则全量重建
   clearTimeout(_reflowTimer);
-  _reflowTimer = setTimeout(() => {
-    try { reflowTeamPositions(); }
-    catch (e) { try { applyFilters(); } catch (_) {} }   // 兜底：失败则全量重建
-  }, 180);
+  _reflowTimer = setTimeout(() => document.body.classList.remove('reflowing'), 300);
 });
 
 // ========================

@@ -985,9 +985,32 @@ body.is-zooming .city-center-ring {
   color: var(--text-muted) !important;
 }
 
-/* 压暗底图：只作用于 Base 瓦片所在的 tilePane，Reference 注记层（overlayPane）保持原亮可读 */
-.leaflet-tile-pane {
-  filter: brightness(0.55) saturate(0.7) contrast(1.08);
+/* 压暗底图：用覆盖层代替 CSS filter。
+   原因：filter 作用在整个瓦片层，缩放/拖动时浏览器必须逐帧对几十张瓦片重新计算，真机上会明显掉帧。
+   覆盖层 z-index 350 位于瓦片层(200)之上、注记层(400)之下 —— 只压暗底图，注释文字保持原亮。 */
+#map::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 14, 26, 0.52);
+  pointer-events: none;
+  z-index: 350;
+}
+
+/* 缩放期间临时关闭毛玻璃：背后地图在动，backdrop-filter 会每帧重新采样模糊，是移动端卡顿主因之一 */
+body.is-zooming #control-panel,
+body.is-zooming #legend,
+body.is-zooming #title-bar,
+body.is-zooming #cyflBanner,
+body.is-zooming #backBtn,
+body.is-zooming #guestbookBtn {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 缩放结束后标记重新归位时给个短过渡，避免图标"啪"地跳到新位置 */
+body.reflowing .leaflet-marker-icon {
+  transition: transform 0.26s cubic-bezier(0.33, 0, 0.2, 1);
 }
 
 /* ========================
@@ -1011,6 +1034,10 @@ body.is-zooming .city-center-ring {
   #cyflBanner { top: 64px; padding: 7px 14px; gap: 7px; }
   #cyflBanner .cb-t { font-size: 12px; }
   #cyflBanner .cb-s { display: none; }
+
+  /* 移动端减负：关闭连接线流动动画、去掉第二层脉冲环（动画数 64 → 16），小屏几乎看不出差别 */
+  .city-connector.flow { animation: none; }
+  .city-center-ring.r2 { display: none; }
 
   #legend {
     bottom: auto;
