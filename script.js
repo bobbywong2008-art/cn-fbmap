@@ -60,6 +60,11 @@ const LOGO_ALIAS = {
   "上海鹰坦克联队": "上海鹰",
   "武汉雪豹": "武汉猎豹", "武汉黑豹": "武汉猎豹"
 };
+// 分队标识色：同一套队徽的不同梯队，靠内圈颜色区分（w白 b蓝 g绿 r红 k黑）
+const SQUAD_TINT = {
+  "上海鹰白": "w", "上海鹰蓝": "b", "上海鹰绿": "g", "上海鹰坦克联队": "r",
+  "武汉雪豹": "w", "武汉黑豹": "k"
+};
 // 返回积分榜用的徽章图路径（裁剪白边版，位于 logos/badge/）；无图返回 null
 function badgeUrl(name){
   const base = LOGO_ALIAS[name] || name;
@@ -68,7 +73,8 @@ function badgeUrl(name){
 }
 // 生成队徽徽章 HTML；idx 为名次索引（0/1/2 分别套金/银/铜环），传 -1 表示不套
 function badgeHtml(name, idx){
-  const cls = 'sch-badge' + (idx===0?' g1':idx===1?' g2':idx===2?' g3':'');
+  const t = SQUAD_TINT[name];
+  const cls = 'sch-badge' + (idx===0?' g1':idx===1?' g2':idx===2?' g3':'') + (t?' tint-'+t:'');
   const u = badgeUrl(name);
   return u
     ? '<span class="'+cls+'"><img src="'+u+'" alt=""></span>'
@@ -1163,7 +1169,13 @@ function scoreCell(hs,as){
   return '<span class="sch-score sc-done"><b class="'+(hw?'sc-win':'')+'">'+hs+'</b><i class="sc-sep">:</i><b class="'+(aw?'sc-win':'')+'">'+as+'</b></span>';
 }
 function tmSpan(t,side){ const j=JOINED.has(t); const sc=side?(' tm-'+side):''; return '<span class="sch-tm'+(j?' joined':'')+sc+'" data-team="'+t+'">'+t+'</span>'; }
-function matchRow(a,b,hs,as){ return '<div class="sch-match">'+tmSpan(a,'left')+scoreCell(hs,as)+tmSpan(b,'right')+'</div>'; }
+function matchRow(a,b,hs,as){
+  return '<div class="sch-match">'
+    + '<span class="sch-side l">'+badgeHtml(a,-2)+tmSpan(a,'left')+'</span>'
+    + scoreCell(hs,as)
+    + '<span class="sch-side r">'+tmSpan(b,'right')+badgeHtml(b,-2)+'</span>'
+    + '</div>';
+}
 function schedAllHTML(){
   const M=SCHEDULE_DATA.schedule[schedAge]||{}, st=SCHEDULE_DATA.stations;
   const teamCnt=(SCHEDULE_DATA.teams[schedAge]||[]).length;

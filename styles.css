@@ -1461,7 +1461,8 @@ body.reflowing .leaflet-marker-icon {
 /* ---- 赛程卡片区 ---- */
 .sch-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* 加了小队徽后每场变宽，列宽从 300 → 360，桌面上由 4 列变 3 列，避免 7 字队名被截断 */
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 16px;
 }
 .sch-card {
@@ -1500,6 +1501,23 @@ body.reflowing .leaflet-marker-icon {
   transition: background 0.15s;
 }
 .sch-match:hover { background: rgba(212, 175, 55, 0.08); }
+
+/* 赛程行两侧：小队徽 + 队名（左队图标在外侧左边，右队图标在外侧右边） */
+.sch-side { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.sch-side.l { justify-content: flex-end; }
+.sch-side.r { justify-content: flex-start; }
+.sch-side .sch-tm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 赛程行里的小徽章：外圈金环收紧，内圈按比例调细 */
+.sch-match .sch-badge {
+  width: 19px; height: 19px;
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.92),
+              0 0 7px rgba(212, 175, 55, 0.28),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+.sch-match .sch-badge::after { box-shadow: inset 0 0 0 1.6px var(--tint, transparent); }
+.sch-match .sch-badge.tint-w::after {
+  box-shadow: inset 0 0 0 1.6px #ffffff, inset 0 0 0 2.9px rgba(18, 26, 45, 0.5);
+}
 .sch-tm {
   cursor: pointer;
   font-weight: 600;
@@ -1562,6 +1580,7 @@ body.reflowing .leaflet-marker-icon {
 
 /* 积分榜队徽徽章 — 方案B：白底圆 + 金色双环 + 外发光（前三名金/银/铜） */
 .sch-badge {
+  position: relative;
   width: 34px; height: 34px; border-radius: 50%;
   background: #fff; overflow: hidden; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
@@ -1586,6 +1605,25 @@ body.reflowing .leaflet-marker-icon {
 }
 /* 球队赛程视图头部的徽章略小一号 */
 .sch-teambar-n .sch-badge { width: 30px; height: 30px; }
+
+/* ===== 分队标识色：贴在队徽「内圈」的彩色环，外圈金/银/铜环不受影响 ===== */
+.sch-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 2.5px var(--tint, transparent);
+}
+.sch-badge.tint-b { --tint: #3d8cff; }   /* 鹰蓝 */
+.sch-badge.tint-g { --tint: #2fbf71; }   /* 鹰绿 */
+.sch-badge.tint-r { --tint: #e2473b; }   /* 鹰坦克联队 */
+.sch-badge.tint-k { --tint: #12161f; }   /* 黑豹 */
+.sch-badge.tint-w { --tint: #ffffff; }   /* 鹰白 / 雪豹 */
+/* 白色环在白色底徽章上会看不见，加粗 + 加一圈深色衬线把轮廓顶出来 */
+.sch-badge.tint-w::after {
+  box-shadow: inset 0 0 0 3px #ffffff, inset 0 0 0 5.2px rgba(18, 26, 45, 0.45);
+}
 
 /* 积分榜窄屏：把「场次/胜/平/负/净胜分」合并成一列「战绩」，保证「积分」始终可见 */
 .sch-c-wdl { display: none; }
