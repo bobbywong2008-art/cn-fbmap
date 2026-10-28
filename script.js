@@ -1195,7 +1195,8 @@ function schedAllHTML(){
 function schedTeamHTML(name){
   const M=SCHEDULE_DATA.schedule[schedAge]||{}, st=SCHEDULE_DATA.stations;
   const list=[];
-  st.forEach(s=>{ (M[s.id]||[]).forEach(m=>{ if(m[0]===name)list.push({s:s,o:m[1],home:true,hs:m[2],as:m[3]}); else if(m[1]===name)list.push({s:s,o:m[0],home:false,hs:m[3],as:m[2]}); }); });
+  // 注意：渲染时左侧恒为「主队」（home ? name : o），所以比分始终用 m[2]:m[3]，不能交换
+  st.forEach(s=>{ (M[s.id]||[]).forEach(m=>{ if(m[0]===name)list.push({s:s,o:m[1],home:true,hs:m[2],as:m[3]}); else if(m[1]===name)list.push({s:s,o:m[0],home:false,hs:m[2],as:m[3]}); }); });
   let h='<div class="sch-inner"><div class="sch-teambar"><button class="sch-back2" onclick="clearSchedTeam()">← 全部赛程</button><span class="sch-teambar-n">'+badgeHtml(name,-1)+'<b>'+name+'</b><span class="sch-teambar-age">'+schedAge+'</span></span>';
   if(cityOfTeam(name)) h+='<button class="sch-goto" data-team="'+name+'">📍 查看 '+cityLabel(name)+' 球队</button>';
   h+='</div><div class="sch-meta-line">'+name+' 在 '+schedAge+' 组共 <b>'+list.length+'</b> 场比赛</div><div class="sch-team-list">';
